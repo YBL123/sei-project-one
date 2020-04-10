@@ -4,25 +4,30 @@ function init() {
 
   // * Dom Elements
   const grid = document.querySelector('.grid')
+  const startButton = document.querySelector('#start')
   const cells = []
-  // * grid variables
-  const width = 10
-  const cellCount = width * width
-  // * game variables
-  let flareonPosition = 95
+  const scoreDisplay = document.querySelector('#score-display')
 
+  // * Grid variables
+  const width = 9
+  const cellCount = width * width
+
+  // * Game variables
+  let flareonPosition = 76
   let playerScore = 0
-  
+
+  // * Functions
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
-      cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
+      cell.textContent = i
     }
     cells[startingPosition].classList.add('flareonIdle')
     
   }
+
   function handleKeyDown(event) {
     cells[flareonPosition].classList.remove('flareonIdle') // * remove knight class from old position
     cells[flareonPosition].classList.remove('flareonRunRight')
@@ -51,26 +56,24 @@ function init() {
         break
       default:
         cells[flareonPosition].classList.add('flareonIdle')
-        console.log('invalid key do nothing') 
-      
-        
+        console.log('invalid key do nothing')    
     }
+    //* calling gameScore function below
     gameScore()
     cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
     
   }
   createGrid(flareonPosition)
   
-  // gameScore()
 
+  //* gameScore function begins here
   function gameScore() {
-    // console.log(cells.indexOf(cells[1]))
     console.log(flareonPosition)
     if (flareonPosition === 1 || flareonPosition ===  3 || flareonPosition ===  5 || flareonPosition ===  7) {
       console.log('at the end')
-      return playerScore = 150
+      playerScore += 150
+      scoreDisplay.textContent = playerScore
     }
-  
   }
   
   // * Event listeners
