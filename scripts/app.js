@@ -15,17 +15,23 @@ function init() {
   // * Game variables
   let flareonPosition = 76
   let playerScore = 0
+  const startingPosition = 76
 
   // * Functions
-  function createGrid(startingPosition) {
+  function startGame() {
+    console.log('start button was clicked')
+  }
+
+
+  function createGrid() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       grid.appendChild(cell)
       cells.push(cell)
-      cell.textContent = i
+      cell.textContent = i //take out later
     }
     cells[startingPosition].classList.add('flareonIdle')
-    
+
   }
 
   function handleKeyDown(event) {
@@ -38,9 +44,9 @@ function init() {
     const x = flareonPosition % width
     const y = Math.floor(flareonPosition / width)
     switch (event.keyCode) { // * calculate the new index
-      case 39: 
+      case 39:
         if (x < width - 1) flareonPosition++ //* right
-        cells[flareonPosition].classList.add('flareonRunRight') 
+        cells[flareonPosition].classList.add('flareonRunRight')
         break
       case 37:
         if (x > 0) flareonPosition-- //* left
@@ -56,27 +62,42 @@ function init() {
         break
       default:
         cells[flareonPosition].classList.add('flareonIdle')
-        console.log('invalid key do nothing')    
+        console.log('invalid key do nothing')
     }
     //* calling gameScore function below
     gameScore()
     cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
-    
+
   }
-  createGrid(flareonPosition)
-  
+  createGrid()
+
 
   //* gameScore function begins here
   function gameScore() {
     console.log(flareonPosition)
-    if (flareonPosition === 1 || flareonPosition ===  3 || flareonPosition ===  5 || flareonPosition ===  7) {
+    if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {
       console.log('at the end')
       playerScore += 150
       scoreDisplay.textContent = playerScore
+      if (cells[1].classList.contains('flareonRunUp') && cells[3].classList.contains('flareonRunUp') && 
+      cells[5].classList.contains('flareonRunUp') && cells[7].classList.contains('flareonRunUp'))
+        nextFlareon()
     }
   }
-  
+
+  //* nextFlareon function begins here - spawns the next sprite once one sprite has reached an end point
+  function nextFlareon() {
+    cells[76].classList.add('flareonIdle')
+    flareonPosition = 76
+  }
+
+  //* win or lose logic function
+  // function winOrLose() {
+  //   if 
+  // }
+
   // * Event listeners
+  startButton.addEventListener('click', startButton)
   document.addEventListener('keydown', handleKeyDown)
 
 
