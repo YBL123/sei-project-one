@@ -35,6 +35,7 @@ function init() {
   }
 
   function handleKeyDown(event) {
+    cells[flareonPosition].classList.remove('flareona')
     cells[flareonPosition].classList.remove('flareonIdle') // * remove knight class from old position
     cells[flareonPosition].classList.remove('flareonRunRight')
     cells[flareonPosition].classList.remove('flareonRunLeft')
@@ -45,16 +46,23 @@ function init() {
     const y = Math.floor(flareonPosition / width)
     switch (event.keyCode) { // * calculate the new index
       case 39:
-        if (x < width - 1) flareonPosition++ //* right
-        cells[flareonPosition].classList.add('flareonRunRight', 'flareona')
+        if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { //* if a falerona is not present within cell's index if going right you may go in. If there is you may not.
+          flareonPosition++ //* right 
+          cells[flareonPosition].classList.add('flareonRunRight', 'flareona')
+        }
         break
       case 37:
-        if (x > 0) flareonPosition-- //* left
-        cells[flareonPosition].classList.add('flareonRunLeft', 'flareona')
+        if ((x > 0) && (!cells[flareonPosition - 1].classList.contains('flareona'))) { //* if a flareona is not present within cell's index if going left, you may go in. If there is you may not.
+          flareonPosition-- //* left
+          cells[flareonPosition].classList.add('flareonRunLeft', 'flareona')
+        }
         break
       case 38:
-        if (y > 0) flareonPosition -= width //* up
-        cells[flareonPosition].classList.add('flareonRunUp', 'flareona')
+        if ((y > 0) && (!cells[flareonPosition - width].classList.contains('flareona'))) { //* if a flareona is not present within cell's index if going up, you may go in. If there is you may not.
+          flareonPosition -= width //* up
+          cells[flareonPosition].classList.add('flareonRunUp', 'flareona')
+        }
+
         break
       case 40:
         if (y < width - 1) flareonPosition += width //* down
@@ -64,8 +72,8 @@ function init() {
         // cells[flareonPosition].classList.add('flareonIdle')
         console.log('invalid key do nothing')
     }
-    //* calling gameScore function below
-    gameScore()
+    //* calling gameLogic function below
+    gameLogic()
     setTimeout(function () {
       cells[flareonPosition].classList.remove('flareonIdle') // * remove knight class from old position
       cells[flareonPosition].classList.remove('flareonRunRight')
@@ -74,28 +82,27 @@ function init() {
       cells[flareonPosition].classList.remove('flareonRunDown')
       cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
     }, 3000)
-    // cells[flareonPosition].classList.add('flareonIdle') 
-
   }
   createGrid()
 
 
-  //* gameScore function begins here
-  function gameScore() {
+  //* gameLogic function begins here
+  function gameLogic() {
 
     console.log(flareonPosition)
+    //* gameScore if statement begins here 
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {
       console.log('at the end')
       playerScore += 150
-      scoreDisplay.textContent = playerScore
+      scoreDisplay.textContent = playerScore   //* print score points ends here
       if (cells[1].classList.contains('flareona') && cells[3].classList.contains('flareona') &&    //* flareona class so it doesn't depend on what arrow key used to get into end point
         cells[5].classList.contains('flareona') && cells[7].classList.contains('flareona')) {
         setTimeout(function () {
           window.alert('win!')
         }, 100)
-        
+
       } else {
-        nextFlareon()
+        nextFlareon()  //* nextFlareon function called here 
       }
 
     }
