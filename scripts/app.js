@@ -9,7 +9,7 @@ function init() {
   const width = 10
   const cellCount = width * width
   // * game variables
-  let knightPosition = 95
+  let flareonPosition = 95
   
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -18,37 +18,43 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
     }
-    cells[startingPosition].classList.add('knightIdle')
+    cells[startingPosition].classList.add('flareonIdle')
     
   }
   function handleKeyUp(event) {
-    cells[knightPosition].classList.remove('knightIdle') // * remove knight class from old position
-    cells[knightPosition].classList.remove('knightRunRight')
-    cells[knightPosition].classList.remove('knightRunLeft')
-    
-    const x = knightPosition % width
-    const y = Math.floor(knightPosition / width)
+    cells[flareonPosition].classList.remove('flareonIdle') // * remove knight class from old position
+    cells[flareonPosition].classList.remove('flareonRunRight')
+    cells[flareonPosition].classList.remove('flareonRunLeft')
+    cells[flareonPosition].classList.remove('flareonRunUp')
+    cells[flareonPosition].classList.remove('flareonRunDown')
+
+    const x = flareonPosition % width
+    const y = Math.floor(flareonPosition / width)
     switch (event.keyCode) { // * calculate the new index
       case 39: 
-        if (x < width - 1) knightPosition++ // right
-        cells[knightPosition].classList.add('knightRunRight')
+        if (x < width - 1) flareonPosition++ // right
+        cells[flareonPosition].classList.add('flareonRunRight')
         break
       case 37:
-        if (x > 0) knightPosition-- // left
-        cells[knightPosition].classList.add('knightRunLeft')
+        if (x > 0) flareonPosition-- // left
+        cells[flareonPosition].classList.add('flareonRunLeft')
         break
       case 38:
-        if (y > 0) knightPosition -= width // up
+        if (y > 0) flareonPosition -= width // up
+        cells[flareonPosition].classList.add('flareonRunUp')
         break
       case 40:
-        if (y < width - 1) knightPosition += width //down
+        if (y < width - 1) flareonPosition += width //down
+        cells[flareonPosition].classList.add('flareonRunDown')
         break
       default:
         console.log('invalid key do nothing') 
+        
     }
-    cells[knightPosition].classList.add('knightIdle') // * add the class back at the new position
+    cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
+    
   }
-  createGrid(knightPosition)
+  createGrid(flareonPosition)
   // * Event listeners
   document.addEventListener('keyup', handleKeyUp)
 
