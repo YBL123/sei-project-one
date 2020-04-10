@@ -40,8 +40,15 @@ body {
   cursor: pointer;
 }
 
-.grid div.knightRun {
-  background-image: url('../assets/run (1).png');
+.grid div.knightRunRight {
+  background-image: url('../assets/Run\ \(1\)right.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.grid div.knightRunLeft {
+  background-image: url('../assets/Run\ \(1\)left.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;

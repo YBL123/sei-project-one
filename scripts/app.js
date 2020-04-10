@@ -9,7 +9,7 @@ function init() {
   const width = 10
   const cellCount = width * width
   // * game variables
-  let knightPosition = 94
+  let knightPosition = 95
   
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -19,18 +19,23 @@ function init() {
       cells.push(cell)
     }
     cells[startingPosition].classList.add('knightIdle')
+    
   }
   function handleKeyUp(event) {
     cells[knightPosition].classList.remove('knightIdle') // * remove knight class from old position
+    cells[knightPosition].classList.remove('knightRunRight')
+    cells[knightPosition].classList.remove('knightRunLeft')
+    
     const x = knightPosition % width
     const y = Math.floor(knightPosition / width)
     switch (event.keyCode) { // * calculate the new index
       case 39: 
         if (x < width - 1) knightPosition++ // right
-        // cells[knightPosition].classList.add('knightRun')
+        cells[knightPosition].classList.add('knightRunRight')
         break
       case 37:
         if (x > 0) knightPosition-- // left
+        cells[knightPosition].classList.add('knightRunLeft')
         break
       case 38:
         if (y > 0) knightPosition -= width // up
