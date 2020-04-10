@@ -10,6 +10,8 @@ function init() {
   const cellCount = width * width
   // * game variables
   let flareonPosition = 95
+
+  let playerScore = 0
   
   function createGrid(startingPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -21,7 +23,7 @@ function init() {
     cells[startingPosition].classList.add('flareonIdle')
     
   }
-  function handleKeyUp(event) {
+  function handleKeyDown(event) {
     cells[flareonPosition].classList.remove('flareonIdle') // * remove knight class from old position
     cells[flareonPosition].classList.remove('flareonRunRight')
     cells[flareonPosition].classList.remove('flareonRunLeft')
@@ -32,31 +34,47 @@ function init() {
     const y = Math.floor(flareonPosition / width)
     switch (event.keyCode) { // * calculate the new index
       case 39: 
-        if (x < width - 1) flareonPosition++ // right
-        cells[flareonPosition].classList.add('flareonRunRight')
+        if (x < width - 1) flareonPosition++ //* right
+        cells[flareonPosition].classList.add('flareonRunRight') 
         break
       case 37:
-        if (x > 0) flareonPosition-- // left
+        if (x > 0) flareonPosition-- //* left
         cells[flareonPosition].classList.add('flareonRunLeft')
         break
       case 38:
-        if (y > 0) flareonPosition -= width // up
+        if (y > 0) flareonPosition -= width //* up
         cells[flareonPosition].classList.add('flareonRunUp')
         break
       case 40:
-        if (y < width - 1) flareonPosition += width //down
+        if (y < width - 1) flareonPosition += width //* down
         cells[flareonPosition].classList.add('flareonRunDown')
         break
       default:
+        cells[flareonPosition].classList.add('flareonIdle')
         console.log('invalid key do nothing') 
+      
         
     }
+    gameScore()
     cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
     
   }
   createGrid(flareonPosition)
+  
+  // gameScore()
+
+  function gameScore() {
+    // console.log(cells.indexOf(cells[1]))
+    console.log(flareonPosition)
+    if (flareonPosition === 1 || flareonPosition ===  3 || flareonPosition ===  5 || flareonPosition ===  7) {
+      console.log('at the end')
+      return playerScore = 150
+    }
+  
+  }
+  
   // * Event listeners
-  document.addEventListener('keyup', handleKeyUp)
+  document.addEventListener('keydown', handleKeyDown)
 
 
 
