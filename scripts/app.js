@@ -46,27 +46,35 @@ function init() {
     switch (event.keyCode) { // * calculate the new index
       case 39:
         if (x < width - 1) flareonPosition++ //* right
-        cells[flareonPosition].classList.add('flareonRunRight')
+        cells[flareonPosition].classList.add('flareonRunRight', 'flareona')
         break
       case 37:
         if (x > 0) flareonPosition-- //* left
-        cells[flareonPosition].classList.add('flareonRunLeft')
+        cells[flareonPosition].classList.add('flareonRunLeft', 'flareona')
         break
       case 38:
         if (y > 0) flareonPosition -= width //* up
-        cells[flareonPosition].classList.add('flareonRunUp')
+        cells[flareonPosition].classList.add('flareonRunUp', 'flareona')
         break
       case 40:
         if (y < width - 1) flareonPosition += width //* down
-        cells[flareonPosition].classList.add('flareonRunDown')
+        cells[flareonPosition].classList.add('flareonRunDown', 'flareona')
         break
       default:
-        cells[flareonPosition].classList.add('flareonIdle')
+        // cells[flareonPosition].classList.add('flareonIdle')
         console.log('invalid key do nothing')
     }
     //* calling gameScore function below
     gameScore()
-    cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
+    setTimeout(function () {
+      cells[flareonPosition].classList.remove('flareonIdle') // * remove knight class from old position
+      cells[flareonPosition].classList.remove('flareonRunRight')
+      cells[flareonPosition].classList.remove('flareonRunLeft')
+      cells[flareonPosition].classList.remove('flareonRunUp')
+      cells[flareonPosition].classList.remove('flareonRunDown')
+      cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
+    }, 3000)
+    // cells[flareonPosition].classList.add('flareonIdle') 
 
   }
   createGrid()
@@ -74,14 +82,22 @@ function init() {
 
   //* gameScore function begins here
   function gameScore() {
+
     console.log(flareonPosition)
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {
       console.log('at the end')
       playerScore += 150
       scoreDisplay.textContent = playerScore
-      if (cells[1].classList.contains('flareonRunUp') && cells[3].classList.contains('flareonRunUp') && 
-      cells[5].classList.contains('flareonRunUp') && cells[7].classList.contains('flareonRunUp'))
+      if (cells[1].classList.contains('flareona') && cells[3].classList.contains('flareona') &&    //* flareona class so it doesn't depend on what arrow key used to get into end point
+        cells[5].classList.contains('flareona') && cells[7].classList.contains('flareona')) {
+        setTimeout(function () {
+          window.alert('win!')
+        }, 100)
+        
+      } else {
         nextFlareon()
+      }
+
     }
   }
 
