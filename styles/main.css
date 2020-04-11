@@ -40,6 +40,7 @@ body {
   width: 11.1111111111%;
 }
     
+    /* flareon */ 
 .grid div.flareonIdle {
   background-image: url('../assets/flareonIdle.gif');
   background-repeat: no-repeat;
@@ -70,6 +71,14 @@ body {
 
 .grid div.flareonRunDown {
   background-image: url('../assets/flareonUp.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+/* enemy */
+.grid div.laprusEnemy {
+  background-image: url('../assets/laprus.gif');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;

@@ -16,14 +16,32 @@ function init() {
   let flareonPosition = 76
   let playerScore = 0
   const startingPosition = 76
+  const enemiesArray = [   //* enemy array
+    { enemypostion: 63 },
+    { enemypostion: 60 }  
+  ]
 
   // * Functions
   function startGame() {
     console.log('start button was clicked')
   }
 
+  function moveEnemies() {
+    for (let index = 0; index < enemiesArray.length; index++) {
+      const element = array[index]
+      
+    }
+  }
 
-  function createGrid() {
+  function placeEnemies() { //* placing the enemies on an index
+    for (let index = 0; index < enemiesArray.length; index++) {
+      cells[enemiesArray[index].enemypostion].classList.add('laprusEnemy')
+      
+    }
+  }
+
+
+  function createGrid() {                    //* creates grid and then cells
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       grid.appendChild(cell)
@@ -31,6 +49,7 @@ function init() {
       cell.textContent = i //take out later
     }
     cells[startingPosition].classList.add('flareonIdle')
+    placeEnemies() //* calling placeEnemies function here so that enemies are created after the character flareon is created
   }
 
   function removeFlareon() {
@@ -43,13 +62,6 @@ function init() {
   }
 
   function handleKeyDown(event) {
-    // cells[flareonPosition].classList.remove('flareona')
-    // cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
-    // cells[flareonPosition].classList.remove('flareonRunRight')
-    // cells[flareonPosition].classList.remove('flareonRunLeft')
-    // cells[flareonPosition].classList.remove('flareonRunUp')
-    // cells[flareonPosition].classList.remove('flareonRunDown')
-
     const x = flareonPosition % width
     const y = Math.floor(flareonPosition / width)
     switch (event.keyCode) { // * calculate the new index
