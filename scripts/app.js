@@ -18,16 +18,44 @@ function init() {
   const startingPosition = 94
   const enemiesArray = [   //* enemy array
     {
-      enemyposition: 63,    //* position property and the value is the index in which the enemy will first be positioned
+      enemyposition: 81,    //* position property and the value is the index in which the enemy will first be positioned
       name: 'laprusEnemy'
     },
     {
-      enemyposition: 60,
+      enemyposition: 88,
+      name: 'laprusEnemy'
+    },
+    {
+      enemyposition: 80,
+      name: 'goldeenEnemy'
+    },
+    {
+      enemyposition: 78,
+      name: 'laprusEnemy'
+    },
+    {
+      enemyposition: 79,
+      name: 'goldeenEnemy'
+    },
+    {
+      enemyposition: 68,
+      name: 'laprusEnemy'
+    },
+    {
+      enemyposition: 66,
+      name: 'goldeenEnemy'
+    },
+    {
+      enemyposition: 54,
       name: 'laprusEnemy'
     },
     {
       enemyposition: 61,
       name: 'goldeenEnemy'
+    },
+    {
+      enemyposition: 59,
+      name: 'laprusEnemy'
     }
   ]
 
@@ -37,13 +65,13 @@ function init() {
   }
 
   function loopGame() {   //* called in createGrid function
-    setTimeout(loopGame, 400)
+    setTimeout(loopGame, 500)
     moveEnemies() //* calling moveEnemies function here so that enemies can move
   }
 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
-
+      
       const x = enemiesArray[index].enemyposition % width
       if (x > 0) {
         cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)
@@ -54,6 +82,8 @@ function init() {
         enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the laprus back by using enemy position + ((with=9) - 1)
         cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the laprus back on the grid
       }
+      
+      collision() //* collision function called here
     }
   }
 
@@ -113,6 +143,7 @@ function init() {
       default:
         console.log('invalid key do nothing')
     }
+    
     //* calling gameLogic function below
     gameLogic()
     setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
@@ -147,8 +178,14 @@ function init() {
       } else {
         nextFlareon()  //* nextFlareon function called here. Spawns next flareon once one of the 4 reach an end point.
       }
-
     }
+  }
+
+  //* collison function starts here
+  function collision() {
+    if (cells[flareonPosition].classList.contains('laprusEnemy') || cells[flareonPosition].classList.contains('goldeenEnemy'))  {
+      console.log('you lose'); return false
+    } 
   }
 
   //* nextFlareon function begins here - spawns the next sprite once one sprite has reached an end point
