@@ -26,20 +26,24 @@ function init() {
     console.log('start button was clicked')
   }
 
-  function moveEnemies() {
+  function loopGame() {
+    setTimeout(loopGame, 1000)
+    moveEnemies() //* calling moveEnemies function here so that enemies can move
+  }
+
+  function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
-      const element = array[index]
-      
+      cells[enemiesArray[index].enemypostion].classList.remove('laprusEnemy')   
+      cells[enemiesArray[index].enemypostion - 1].classList.add('laprusEnemy')
+      enemiesArray[index].enemypostion = enemiesArray[index].enemypostion - 1  //* changes the value for the object's enemyposition property
     }
   }
 
   function placeEnemies() { //* placing the enemies on an index
     for (let index = 0; index < enemiesArray.length; index++) {
       cells[enemiesArray[index].enemypostion].classList.add('laprusEnemy')
-      
     }
   }
-
 
   function createGrid() {                    //* creates grid and then cells
     for (let i = 0; i < cellCount; i++) {
@@ -50,6 +54,7 @@ function init() {
     }
     cells[startingPosition].classList.add('flareonIdle')
     placeEnemies() //* calling placeEnemies function here so that enemies are created after the character flareon is created
+    loopGame() //* loops game
   }
 
   function removeFlareon() {
