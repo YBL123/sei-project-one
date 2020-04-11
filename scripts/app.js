@@ -18,7 +18,7 @@ function init() {
   const startingPosition = 76
   const enemiesArray = [   //* enemy array
     { enemypostion: 63 },
-    { enemypostion: 60 }  
+    { enemypostion: 60 }
   ]
 
   // * Functions
@@ -27,15 +27,23 @@ function init() {
   }
 
   function loopGame() {
-    setTimeout(loopGame, 1000)
+    setTimeout(loopGame, 400)
     moveEnemies() //* calling moveEnemies function here so that enemies can move
   }
 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
-      cells[enemiesArray[index].enemypostion].classList.remove('laprusEnemy')   
-      cells[enemiesArray[index].enemypostion - 1].classList.add('laprusEnemy')
-      enemiesArray[index].enemypostion = enemiesArray[index].enemypostion - 1  //* changes the value for the object's enemyposition property
+
+      const x = enemiesArray[index].enemypostion % width
+      if (x > 0) {
+        cells[enemiesArray[index].enemypostion].classList.remove('laprusEnemy')
+        cells[enemiesArray[index].enemypostion - 1].classList.add('laprusEnemy')
+        enemiesArray[index].enemypostion = enemiesArray[index].enemypostion - 1  //* changes the value for the object's enemyposition property
+      } else {
+        cells[enemiesArray[index].enemypostion].classList.remove('laprusEnemy')  //* removes the laprus 
+        enemiesArray[index].enemypostion = enemiesArray[index].enemypostion + (width - 1)  //* places the laprus back by using enemy postion + ((with=9) - 1)
+        cells[enemiesArray[index].enemypostion].classList.add('laprusEnemy') //* adds the laprus back on the grid
+      }
     }
   }
 
@@ -75,7 +83,6 @@ function init() {
           removeFlareon()
           flareonPosition++ //* right 
           cells[flareonPosition].classList.add('flareonRunRight', 'flareona')
-
         }
         break
       case 37:
@@ -91,7 +98,6 @@ function init() {
           flareonPosition -= width //* up
           cells[flareonPosition].classList.add('flareonRunUp', 'flareona')
         }
-
         break
       case 40:
         if (y < width - 1) {
