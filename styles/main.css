@@ -69,7 +69,7 @@ body {
 }
 
 .grid div.flareonRunDown {
-  background-image: url('../assets/flareonDown.gif');
+  background-image: url('../assets/flareonUp.gif');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
