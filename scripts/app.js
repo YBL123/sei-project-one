@@ -10,15 +10,25 @@ function init() {
 
   // * Grid variables
   const width = 9
-  const cellCount = width * width
+  const cellCount = (width * width) + (width * 2)
 
   // * Game variables
-  let flareonPosition = 76
+  let flareonPosition = 94
   let playerScore = 0
-  const startingPosition = 76
+  const startingPosition = 94
   const enemiesArray = [   //* enemy array
-    { enemypostion: 63 },
-    { enemypostion: 60 }
+    {
+      enemyposition: 63,    //* position property and the value is the index in which the enemy will first be positioned
+      name: 'laprusEnemy'
+    },
+    {
+      enemyposition: 60,
+      name: 'laprusEnemy'
+    },
+    {
+      enemyposition: 61,
+      name: 'goldeenEnemy'
+    }
   ]
 
   // * Functions
@@ -26,7 +36,7 @@ function init() {
     console.log('start button was clicked')
   }
 
-  function loopGame() {
+  function loopGame() {   //* called in createGrid function
     setTimeout(loopGame, 400)
     moveEnemies() //* calling moveEnemies function here so that enemies can move
   }
@@ -34,24 +44,19 @@ function init() {
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
 
-      const x = enemiesArray[index].enemypostion % width
+      const x = enemiesArray[index].enemyposition % width
       if (x > 0) {
-        cells[enemiesArray[index].enemypostion].classList.remove('laprusEnemy')
-        cells[enemiesArray[index].enemypostion - 1].classList.add('laprusEnemy')
-        enemiesArray[index].enemypostion = enemiesArray[index].enemypostion - 1  //* changes the value for the object's enemyposition property
+        cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)
+        cells[enemiesArray[index].enemyposition - 1].classList.add(enemiesArray[index].name) //* adds the property name of the object in the index order using the for loop. Adds and removes dynamically
+        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - 1  //* changes the value for the object's enemyposition property
       } else {
-        cells[enemiesArray[index].enemypostion].classList.remove('laprusEnemy')  //* removes the laprus 
-        enemiesArray[index].enemypostion = enemiesArray[index].enemypostion + (width - 1)  //* places the laprus back by using enemy postion + ((with=9) - 1)
-        cells[enemiesArray[index].enemypostion].classList.add('laprusEnemy') //* adds the laprus back on the grid
+        cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)  //* removes the laprus 
+        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the laprus back by using enemy position + ((with=9) - 1)
+        cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the laprus back on the grid
       }
     }
   }
 
-  function placeEnemies() { //* placing the enemies on an index
-    for (let index = 0; index < enemiesArray.length; index++) {
-      cells[enemiesArray[index].enemypostion].classList.add('laprusEnemy')
-    }
-  }
 
   function createGrid() {                    //* creates grid and then cells
     for (let i = 0; i < cellCount; i++) {
@@ -61,7 +66,6 @@ function init() {
       cell.textContent = i //take out later
     }
     cells[startingPosition].classList.add('flareonIdle')
-    placeEnemies() //* calling placeEnemies function here so that enemies are created after the character flareon is created
     loopGame() //* loops game
   }
 
@@ -100,7 +104,7 @@ function init() {
         }
         break
       case 40:
-        if (y < width - 1) {
+        if (y < width + 1) {
           removeFlareon()
           flareonPosition += width //* down
           cells[flareonPosition].classList.add('flareonRunDown', 'flareona')
@@ -149,8 +153,8 @@ function init() {
 
   //* nextFlareon function begins here - spawns the next sprite once one sprite has reached an end point
   function nextFlareon() {
-    cells[76].classList.add('flareonIdle')
-    flareonPosition = 76
+    cells[94].classList.add('flareonIdle')
+    flareonPosition = 94
   }
 
   //* win or lose logic function
