@@ -184,6 +184,10 @@ function init() {
   //* collison function starts here
   function collision() {
     if (cells[flareonPosition].classList.contains('laprusEnemy') || cells[flareonPosition].classList.contains('goldeenEnemy'))  {
+      removeFlareon()
+      // cells[flareonPosition].classList.add('collision')
+      // cells[flareonPosition].classList.remove('collision')
+      nextFlareon()
       console.log('you lose'); return false
     } 
   }
