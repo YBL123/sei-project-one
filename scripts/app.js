@@ -12,11 +12,13 @@ function init() {
   const width = 9
   const cellCount = (width * width) + (width * 2)
 
-  // * Game variables
+  // * Game variables 
+  const startingPosition = 94
   let flareonPosition = 94
   let playerScore = 0
   let collisionExplosionPosition = 0
-  const startingPosition = 94
+  // let floatsPosition = 0
+
   const enemiesArray = [   //* enemy array
     {
       enemyposition: 81,    //* position property and the value is the index in which the enemy will first be positioned
@@ -59,7 +61,12 @@ function init() {
       name: 'laprusEnemy'
     }
   ]
-
+  const floatsArray = [           //* floats array
+    {
+      floatposition: 36,
+      name: 'float'
+    }
+  ]
   // * Functions
   function startGame() {
     console.log('start button was clicked')
@@ -68,6 +75,7 @@ function init() {
   function loopGame() {   //* called in createGrid function
     setTimeout(loopGame, 500)
     moveEnemies() //* calling moveEnemies function here so that enemies can move
+    floatsCollision() //* floats function called here
   }
 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
@@ -84,7 +92,8 @@ function init() {
         cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the laprus back on the grid
       }
 
-      collision() //* collision function called here
+      enemyCollision() //* collision function called here
+      floats()  //* floats function called here
     }
   }
 
@@ -182,16 +191,16 @@ function init() {
     }
   }
 
-  //* collison function starts here
-  function collision() {
+  //* enemy collison function starts here
+  function enemyCollision() {
     if (cells[flareonPosition].classList.contains('laprusEnemy') || cells[flareonPosition].classList.contains('goldeenEnemy')) {
       cells[flareonPosition].classList.add('collision')
       removeFlareon()
-      collisionExplosionPosition = flareonPosition //* collision explosion position is now equal to the flareon position so both will be removed at the same time
+      collisionExplosionPosition = flareonPosition //* collision explosion position is now equal to the flareon position so that the explosion will be removed and not just flareon
       setTimeout(function () {
         // console.log(collisionExplosionPosition) 
         cells[collisionExplosionPosition].classList.remove('collision')
-      }, 250) 
+      }, 250)
       nextFlareon()
       console.log('you lose'); return false
     }
@@ -201,6 +210,35 @@ function init() {
   function nextFlareon() {
     cells[94].classList.add('flareonIdle')
     flareonPosition = 94
+  }
+
+  //* floats collision function starts here
+  function floatsCollision() {
+    // console.log(cells[floatsArray[0].floatposition])
+    if (cells[floatsArray[0].floatposition].classList.contains('flareona')) {
+      removeFlareon()
+      flareonPosition = floatsArray[0].floatposition - 1
+      // console.log(flareonPosition)
+      cells[flareonPosition].classList.add('flareonIdle', 'flareona')
+      console.log(flareonPosition)
+    }
+  }
+
+  //* floats function starts here
+  function floats() {
+    for (let index = 0; index < floatsArray.length; index++) {
+      const x = floatsArray[index].floatposition % width
+      if (x > 0) {
+        cells[floatsArray[index].floatposition].classList.remove(floatsArray[index].name)
+        cells[floatsArray[index].floatposition - 1].classList.add(floatsArray[index].name) //* adds the property name of the object in the index order using the for loop. Adds and removes dynamically
+        floatsArray[index].floatposition = floatsArray[index].floatposition - 1  //* changes the value for the object's floatposition property
+        // floatsCollision()
+      } else {
+        cells[floatsArray[index].floatposition].classList.remove(floatsArray[index].name)  //* removes the float 
+        floatsArray[index].floatposition = floatsArray[index].floatposition + (width - 1)  //* places the float back by using floatposition + ((with=9) - 1)
+        cells[floatsArray[index].floatposition].classList.add(floatsArray[index].name) //* adds the float back on the grid
+      } 
+    } 
   }
 
   //* win or lose logic function

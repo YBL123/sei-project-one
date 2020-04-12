@@ -91,8 +91,17 @@ body {
   cursor: pointer;
 }
 
+/* collision gif */
 .grid div.collision {
   background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4ddabef1-8390-424a-a828-f61e4df3d499/d4vvtsd-9198838a-133c-478e-ba7b-9d2b9b5f4401.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzRkZGFiZWYxLTgzOTAtNDI0YS1hODI4LWY2MWU0ZGYzZDQ5OVwvZDR2dnRzZC05MTk4ODM4YS0xMzNjLTQ3OGUtYmE3Yi05ZDJiOWI1ZjQ0MDEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.AyH_iQH-ECxX0-9n9hJyitTpc3UG-cfryOZ9qFp7euE');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+/* floats */
+.grid div.float {
+  background-image: url('../assets/Pad_03_1.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
