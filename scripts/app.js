@@ -15,6 +15,7 @@ function init() {
   // * Game variables
   let flareonPosition = 94
   let playerScore = 0
+  let collisionExplosionPosition = 0
   const startingPosition = 94
   const enemiesArray = [   //* enemy array
     {
@@ -71,7 +72,7 @@ function init() {
 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
-      
+
       const x = enemiesArray[index].enemyposition % width
       if (x > 0) {
         cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)
@@ -82,7 +83,7 @@ function init() {
         enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the laprus back by using enemy position + ((with=9) - 1)
         cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the laprus back on the grid
       }
-      
+
       collision() //* collision function called here
     }
   }
@@ -143,7 +144,7 @@ function init() {
       default:
         console.log('invalid key do nothing')
     }
-    
+
     //* calling gameLogic function below
     gameLogic()
     setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
@@ -183,13 +184,17 @@ function init() {
 
   //* collison function starts here
   function collision() {
-    if (cells[flareonPosition].classList.contains('laprusEnemy') || cells[flareonPosition].classList.contains('goldeenEnemy'))  {
+    if (cells[flareonPosition].classList.contains('laprusEnemy') || cells[flareonPosition].classList.contains('goldeenEnemy')) {
+      cells[flareonPosition].classList.add('collision')
       removeFlareon()
-      // cells[flareonPosition].classList.add('collision')
-      // cells[flareonPosition].classList.remove('collision')
+      collisionExplosionPosition = flareonPosition //* collision explosion position is now equal to the flareon position so both will be removed at the same time
+      setTimeout(function () {
+        // console.log(collisionExplosionPosition) 
+        cells[collisionExplosionPosition].classList.remove('collision')
+      }, 250) 
       nextFlareon()
       console.log('you lose'); return false
-    } 
+    }
   }
 
   //* nextFlareon function begins here - spawns the next sprite once one sprite has reached an end point
