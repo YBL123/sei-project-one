@@ -4,7 +4,7 @@ function init() {
 
   // * Dom Elements
   const grid = document.querySelector('.grid')
-  const startButton = document.querySelector('#start')
+  // const startButton = document.querySelector('#start')
   const cells = []
   const scoreDisplay = document.querySelector('#score-display')
 
@@ -17,7 +17,6 @@ function init() {
   let flareonPosition = 94
   let playerScore = 0
   let collisionExplosionPosition = 0
-  // let floatsPosition = 0
 
   const enemiesArray = [   //* enemy array
     {
@@ -63,43 +62,24 @@ function init() {
   ]
   const floatsArray = [           //* floats array
     {
-      floatposition: 36, 
+      floatposition: 36,
+      name: 'float'
+    },
+    {
+      floatposition: 38,
       name: 'float'
     }
   ]
+
+  startGame()    //* Start Game Called here
   // * Functions
   function startGame() {
-    console.log('start button was clicked')
+    createGrid()
+    // * Event listeners
+    document.addEventListener('keydown', handleKeyDown)
+    addPlayer('flareonIdle') //* adds player
+    loopGame() //* loops game
   }
-
-  function loopGame() {   //* called in createGrid function
-    setTimeout(loopGame, 500)
-    floatCollision() //* float collision function called here
-    floats()  //* floats function called here
-    console.log(flareonPosition)
-    moveEnemies() //* calling moveEnemies function here so that enemies can move
-    enemyCollision() //* collision function called here
-  }
-
-  function moveEnemies() { //* moveEnemies function    [index] is for all object in array
-    for (let index = 0; index < enemiesArray.length; index++) {
-
-      const x = enemiesArray[index].enemyposition % width
-      if (x > 0) {
-        cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)
-        cells[enemiesArray[index].enemyposition - 1].classList.add(enemiesArray[index].name) //* adds the property name of the object in the index order using the for loop. Adds and removes dynamically
-        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - 1  //* changes the value for the object's enemyposition property
-      } else {
-        cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)  //* removes the enemy 
-        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the enemy back by using enemy position + ((with=9) - 1)
-        cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the enemy back on the grid
-      }
-
-      // enemyCollision() //* collision function called here
-      // // floats()  //* floats function called here
-    }
-  }
-
 
   function createGrid() {                    //* creates grid and then cells
     for (let i = 0; i < cellCount; i++) {
@@ -108,17 +88,6 @@ function init() {
       cells.push(cell)
       cell.textContent = i //take out later
     }
-    cells[startingPosition].classList.add('flareonIdle')
-    loopGame() //* loops game
-  }
-
-  function removeFlareon() {
-    cells[flareonPosition].classList.remove('flareona')
-    cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
-    cells[flareonPosition].classList.remove('flareonRunRight')
-    cells[flareonPosition].classList.remove('flareonRunLeft')
-    cells[flareonPosition].classList.remove('flareonRunUp')
-    cells[flareonPosition].classList.remove('flareonRunDown')
   }
 
   function handleKeyDown(event) {
@@ -127,38 +96,32 @@ function init() {
     switch (event.keyCode) { // * calculate the new index
       case 39:
         if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going right you may go in. If there is you may not.
-          removeFlareon()
           flareonPosition++ //* right 
-          cells[flareonPosition].classList.add('flareonRunRight', 'flareona')
+          addPlayer('flareonRunRight')
         }
         break
       case 37:
         if ((x > 0) && (!cells[flareonPosition - 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going left, you may go in. If there is you may not.
-          removeFlareon()
           flareonPosition-- //* left
-          cells[flareonPosition].classList.add('flareonRunLeft', 'flareona')
+          addPlayer('flareonRunLeft')
         }
         break
       case 38:
         if ((y > 0) && (!cells[flareonPosition - width].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going up, you may go in. If there is you may not.
-          removeFlareon()
           flareonPosition -= width //* up
-          cells[flareonPosition].classList.add('flareonRunUp', 'flareona')
+          addPlayer('flareonRunUp')
         }
         break
       case 40:
         if (y < width + 1) {
-          removeFlareon()
           flareonPosition += width //* down
-          cells[flareonPosition].classList.add('flareonRunDown', 'flareona')
+          addPlayer('flareonRunDown')
         }
         break
       default:
         console.log('invalid key do nothing')
     }
 
-    //* calling gameLogic function below
-    gameLogic()
     setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
       cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
       cells[flareonPosition].classList.remove('flareonRunRight')
@@ -167,16 +130,17 @@ function init() {
       cells[flareonPosition].classList.remove('flareonRunDown')
       cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
     }, 1000)
-  }
-  createGrid()
 
+    //* calling gameLogic function below
+    winLogic()
+  }
 
   //* gameLogic function begins here
-  function gameLogic() {
+  function winLogic() {
 
     // console.log(flareonPosition)
     //* gameScore if statement begins here 
-    if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {
+    if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {  //* end points
       console.log('at the end')
       playerScore += 150
       scoreDisplay.textContent = playerScore   //* prints score points ends here
@@ -194,6 +158,47 @@ function init() {
     }
   }
 
+  function addPlayer(playerDirection) {     //* player direction is the direction the player will be taking 
+    //* character creation
+    removeFlareon() //* so when a new flareon is spawned in event of collision or "death" the previous one will be removed from the board
+    cells[flareonPosition].classList.add(playerDirection, 'flareona')
+  }
+
+  function loopGame() {   //* called in createGrid function
+    setTimeout(loopGame, 500)
+    // console.log(flareonPosition)
+    moveEnemies() //* calling moveEnemies function here so that enemies can move
+    // enemyCollision() //* collision function called here
+    moveFloats()  //* floats function called here
+    // floatCollision() //* float collision function called here
+  }
+
+  function moveEnemies() { //* moveEnemies function    [index] is for all object in array
+    for (let index = 0; index < enemiesArray.length; index++) {
+
+      const x = enemiesArray[index].enemyposition % width
+      if (x > 0) {    //* if x is greater than 0 it is allowed to move left
+        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - 1  //* reassigns the value for the object's enemyposition property
+      } else {   //* if enemy can't move left anymore
+        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the enemy back at it's starting position by using enemy position + ((with=9) - 1)
+      }
+    }
+    displayEnemies() //* displays enemies. (removeEnemies function is already inside)
+    enemyCollision() //* enemy collision is called here
+  }
+
+  //* display
+  function displayEnemies() {
+    removeEnemies()   //* removes the enemy 
+    enemiesArray.forEach(enemy => cells[enemy.enemyposition].classList.add(enemy.name)) //* adds the enemy back on the grid - always need to remove before displaying so the board is a clean slate.
+  }
+
+  //* remove enemies
+  function removeEnemies() {
+    cells.forEach(cell => cell.classList.remove('lugiaEnemy', 'lugia2Enemy')) //* removes enemies
+    // console.log('test')
+  }
+
   //* enemy collison function starts here
   function enemyCollision() {
     if (cells[flareonPosition].classList.contains('lugiaEnemy') || cells[flareonPosition].classList.contains('lugia2Enemy')) {
@@ -205,53 +210,69 @@ function init() {
         cells[collisionExplosionPosition].classList.remove('collision')
       }, 250)
       nextFlareon()
-      console.log('you lose'); return false
+      // console.log('you lose'); return false
     }
   }
 
-  //* nextFlareon function begins here - spawns the next sprite once one sprite has reached an end point
+  //* next flareon function begins here - spawns the next sprite once one sprite has reached an end point
   function nextFlareon() {
-    cells[94].classList.add('flareonIdle')
-    flareonPosition = 94
+    flareonPosition = startingPosition
+    addPlayer('flareonIdle')
+  }
+
+  //* remove flareon function begins here 
+  function removeFlareon() {
+    cells.forEach(function (currentValue, index) {
+      if (index !== 1 && index !== 3 && index !== 5 && index !== 7) {  //* if it's not one of the end indexes then continue
+        // console.log('remove')
+        return currentValue.classList.remove('flareonIdle', 'flareonRunUp', 'flareonRunRight', 'flareonRunLeft', 'flareonRunDown', 'flareona') // * remove flareon class from old position
+      }
+    })
+  }
+
+  //* move floats function starts here
+  function moveFloats() {
+    for (let index = 0; index < floatsArray.length; index++) {
+
+      const x = floatsArray[index].floatposition % width
+      if (x > 0) {
+        floatsArray[index].floatposition = floatsArray[index].floatposition - 1  //* changes the value for the object's float position property
+      } else {
+        floatsArray[index].floatposition = floatsArray[index].floatposition + (width - 1)  //* places the float back by using float position + ((with=9) - 1)
+      }
+    }
+    displayFloats() //* display floats function called here. Remove float function is already inside
+    floatCollision() //* float collision function is called here
+  }
+  
+  //* displays floats
+  function displayFloats() {
+    removeFloats() //* remove floats function called here
+    floatsArray.forEach(floatitem => cells[floatitem.floatposition].classList.add(floatitem.name))   //* float item "becomes the object name for the duration of the loop"
+  }
+
+  //* removes floats
+  function removeFloats() {    
+    cells.forEach(cell => cell.classList.remove('float', 'floatAndFlareon'))
   }
 
   //* floats collision function starts here
   function floatCollision() {
-    // console.log(cells[floatsArray[0].floatposition])
-    if (cells[floatsArray[0].floatposition].classList.contains('flareona')) {
-      removeFlareon()
-      flareonPosition = floatsArray[0].floatposition - 1
-      // console.log(flareonPosition)
-      // cells[flareonPosition].classList.add('flareonIdle', 'flareona')
-      cells[floatsArray[0].floatposition - 1].classList.add('floatAndFlareon','flareonIdle', 'flareona')
-      console.log('floatAndFlareon')
-      // console.log(flareonPosition)
+    for (let index = 0; index < floatsArray.length; index++) {
+      if (floatsArray[index].floatposition === flareonPosition) {
+        removeFlareon()
+        flareonPosition = flareonPosition - 1
+        cells[flareonPosition].classList.add('floatAndFlareon', 'flareonIdle', 'flareona')
+      }
     }
   }
 
-  //* floats function starts here
-  function floats() {
-    for (let index = 0; index < floatsArray.length; index++) {
-      const x = floatsArray[index].floatposition % width
-      // console.log(x)
-      if (x > 0) {
-        cells[floatsArray[index].floatposition].classList.remove(floatsArray[index].name)
-        cells[floatsArray[index].floatposition - 1].classList.add(floatsArray[index].name) //* adds the property name of the object in the index order using the for loop. Adds and removes dynamically
-        floatsArray[index].floatposition = floatsArray[index].floatposition - 1  //* changes the value for the object's floatposition property
-        // floatsCollision()
-      } else {
-        cells[floatsArray[index].floatposition].classList.remove(floatsArray[index].name)  //* removes the float 
-        floatsArray[index].floatposition = floatsArray[index].floatposition + (width - 1)  //* places the float back by using floatposition + ((with=9) - 1)
-        cells[floatsArray[index].floatposition].classList.add(floatsArray[index].name) //* adds the float back on the grid
-      } 
-    } 
-  }
 
 
 
-  // * Event listeners
-  startButton.addEventListener('click', startButton)
-  document.addEventListener('keydown', handleKeyDown)
+
+
+
 
 
 
