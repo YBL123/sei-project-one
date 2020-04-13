@@ -13,13 +13,13 @@ function init() {
   const cellCount = (width * width) + (width * 2)
 
   // * Game variables 
+  let playerLives = 3
   const startingPosition = 94
   let flareonPosition = 94
   let playerOnFloatFlag = false
   let playerScore = 0
   let collisionExplosionPosition = 0
-  const dangerZone = false
-  let water = []
+  const water = []  //* change to let
 
   const enemiesArray = [   //* enemy array
     {
@@ -171,7 +171,8 @@ function init() {
       cells[flareonPosition].classList.add('floatAndFlareon', 'flareona') //* if player is on float then add float and flareon class + flareona class.
     } else {
       cells[flareonPosition].classList.add(playerDirection, 'flareona') //* if player is not on flag then only add player direction + flareona class.
-    }   
+    }
+    waterDangerZone() //* water danger zone function is called here 
   }
 
   //* playerOnWater function starts here
@@ -239,8 +240,15 @@ function init() {
 
   //* next flareon function begins here - spawns the next sprite once one sprite has reached an end point
   function nextFlareon() {
-    flareonPosition = startingPosition
-    addPlayer('flareonIdle')
+    playerLives--     //* so player lives will decrease when you "die"
+    if (playerLives === 0) {   //* if plyaer loses all lives
+      clearTimeout(loopGame)   //* stops game loop when player dies
+      alert('GAME OVER')
+    } else {
+      flareonPosition = startingPosition    //* takes player back to starting position
+      addPlayer('flareonIdle')
+    }
+    
   }
 
   //* remove flareon function begins here 
@@ -290,8 +298,11 @@ function init() {
   }
 
   //* danger zone function starts here
-  function dangerZone() {
-    water = cells.slice(9, 44) //* selects all indexes ranging from 9 - 44 for danger zone/water
+  function waterDangerZone() {
+    // water = cells.slice(9, 44) //* selects all indexes ranging from 9 - 44 for danger zone/water
+    if (flareonPosition >= 9 && flareonPosition <= 44 && !cells[flareonPosition].classList.contains('floatAndFlareon')) {
+      nextFlareon() 
+    }
   }
 
 
