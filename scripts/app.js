@@ -15,8 +15,11 @@ function init() {
   // * Game variables 
   const startingPosition = 94
   let flareonPosition = 94
+  let playerOnFloatFlag = false
   let playerScore = 0
   let collisionExplosionPosition = 0
+  const dangerZone = false
+  let water = []
 
   const enemiesArray = [   //* enemy array
     {
@@ -71,7 +74,7 @@ function init() {
     }
   ]
 
-  startGame()    //* Start Game Called here
+  startGame()    //* Start Game function called here
   // * Functions
   function startGame() {
     createGrid()
@@ -131,11 +134,11 @@ function init() {
       cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
     }, 1000)
 
-    //* calling gameLogic function below
+    //* calling win logic function below
     winLogic()
   }
 
-  //* gameLogic function begins here
+  //* win logic function begins here
   function winLogic() {
 
     // console.log(flareonPosition)
@@ -153,17 +156,36 @@ function init() {
         }, 100)
 
       } else {
-        nextFlareon()  //* nextFlareon function called here. Spawns next flareon once one of the 4 reach an end point.
+        nextFlareon()  //* next flareon function called here. Spawns next flareon once one of the 4 reach an end point.
       }
     }
   }
 
+
+  //* add player function starts here
   function addPlayer(playerDirection) {     //* player direction is the direction the player will be taking 
     //* character creation
     removeFlareon() //* so when a new flareon is spawned in event of collision or "death" the previous one will be removed from the board
-    cells[flareonPosition].classList.add(playerDirection, 'flareona')
+    playerOnFloat() //* player on float function is called here. This way the playeronfloat variable will update and let me know if it's true or false.
+    if (playerOnFloatFlag) {
+      cells[flareonPosition].classList.add('floatAndFlareon', 'flareona') //* if player is on float then add float and flareon class + flareona class.
+    } else {
+      cells[flareonPosition].classList.add(playerDirection, 'flareona') //* if player is not on flag then only add player direction + flareona class.
+    }   
   }
 
+  //* playerOnWater function starts here
+  function playerOnFloat() {
+    for (let index = 0; index < floatsArray.length; index++) {
+      if (floatsArray[index].floatposition === flareonPosition) {
+        playerOnFloatFlag = true
+      } else {
+        playerOnFloatFlag = false
+      }
+    }
+  }
+
+  //* loop game function starts here
   function loopGame() {   //* called in createGrid function
     setTimeout(loopGame, 500)
     // console.log(flareonPosition)
@@ -173,6 +195,7 @@ function init() {
     // floatCollision() //* float collision function called here
   }
 
+  //* move enemies function starts here 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
 
@@ -244,7 +267,7 @@ function init() {
     displayFloats() //* display floats function called here. Remove float function is already inside
     floatCollision() //* float collision function is called here
   }
-  
+
   //* displays floats
   function displayFloats() {
     removeFloats() //* remove floats function called here
@@ -252,19 +275,23 @@ function init() {
   }
 
   //* removes floats
-  function removeFloats() {    
+  function removeFloats() {
     cells.forEach(cell => cell.classList.remove('float', 'floatAndFlareon'))
   }
 
   //* floats collision function starts here
   function floatCollision() {
     for (let index = 0; index < floatsArray.length; index++) {
-      if (floatsArray[index].floatposition === flareonPosition) {
-        removeFlareon()
-        flareonPosition = flareonPosition - 1
-        cells[flareonPosition].classList.add('floatAndFlareon', 'flareonIdle', 'flareona')
+      if (floatsArray[index].floatposition === flareonPosition - 1) {  //* checking if float position is equal to flareon position. The flareon position is decreased by one in order for float position to chase after flareon position. 
+        flareonPosition--   //* if statement above is true , then flareon position is reassigned. (flareon position = flareon position -1). This way the flareon position is one step ahead allows the float position to chase it.
+        addPlayer('floatAndFlareon') //* adds float and flareon class to show flareon on float
       }
     }
+  }
+
+  //* danger zone function starts here
+  function dangerZone() {
+    water = cells.slice(9, 44) //* selects all indexes ranging from 9 - 44 for danger zone/water
   }
 
 
