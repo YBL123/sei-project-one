@@ -22,48 +22,48 @@ function init() {
   const enemiesArray = [   //* enemy array
     {
       enemyposition: 81,    //* position property and the value is the index in which the enemy will first be positioned
-      name: 'laprusEnemy'
+      name: 'lugiaEnemy'
     },
     {
       enemyposition: 88,
-      name: 'laprusEnemy'
+      name: 'lugiaEnemy'
     },
     {
       enemyposition: 80,
-      name: 'goldeenEnemy'
+      name: 'lugia2Enemy'
     },
     {
       enemyposition: 78,
-      name: 'laprusEnemy'
+      name: 'lugiaEnemy'
     },
     {
       enemyposition: 79,
-      name: 'goldeenEnemy'
+      name: 'lugia2Enemy'
     },
     {
       enemyposition: 68,
-      name: 'laprusEnemy'
+      name: 'lugiaEnemy'
     },
     {
       enemyposition: 66,
-      name: 'goldeenEnemy'
+      name: 'lugia2Enemy'
     },
     {
       enemyposition: 54,
-      name: 'laprusEnemy'
+      name: 'lugiaEnemy'
     },
     {
       enemyposition: 61,
-      name: 'goldeenEnemy'
+      name: 'lugia2Enemy'
     },
     {
       enemyposition: 59,
-      name: 'laprusEnemy'
+      name: 'lugiaEnemy'
     }
   ]
   const floatsArray = [           //* floats array
     {
-      floatposition: 36,
+      floatposition: 36, 
       name: 'float'
     }
   ]
@@ -74,8 +74,11 @@ function init() {
 
   function loopGame() {   //* called in createGrid function
     setTimeout(loopGame, 500)
+    floatCollision() //* float collision function called here
+    floats()  //* floats function called here
+    console.log(flareonPosition)
     moveEnemies() //* calling moveEnemies function here so that enemies can move
-    floatsCollision() //* floats function called here
+    enemyCollision() //* collision function called here
   }
 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
@@ -87,13 +90,13 @@ function init() {
         cells[enemiesArray[index].enemyposition - 1].classList.add(enemiesArray[index].name) //* adds the property name of the object in the index order using the for loop. Adds and removes dynamically
         enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - 1  //* changes the value for the object's enemyposition property
       } else {
-        cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)  //* removes the laprus 
-        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the laprus back by using enemy position + ((with=9) - 1)
-        cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the laprus back on the grid
+        cells[enemiesArray[index].enemyposition].classList.remove(enemiesArray[index].name)  //* removes the enemy 
+        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the enemy back by using enemy position + ((with=9) - 1)
+        cells[enemiesArray[index].enemyposition].classList.add(enemiesArray[index].name) //* adds the enemy back on the grid
       }
 
-      enemyCollision() //* collision function called here
-      floats()  //* floats function called here
+      // enemyCollision() //* collision function called here
+      // // floats()  //* floats function called here
     }
   }
 
@@ -171,7 +174,7 @@ function init() {
   //* gameLogic function begins here
   function gameLogic() {
 
-    console.log(flareonPosition)
+    // console.log(flareonPosition)
     //* gameScore if statement begins here 
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {
       console.log('at the end')
@@ -193,7 +196,7 @@ function init() {
 
   //* enemy collison function starts here
   function enemyCollision() {
-    if (cells[flareonPosition].classList.contains('laprusEnemy') || cells[flareonPosition].classList.contains('goldeenEnemy')) {
+    if (cells[flareonPosition].classList.contains('lugiaEnemy') || cells[flareonPosition].classList.contains('lugia2Enemy')) {
       cells[flareonPosition].classList.add('collision')
       removeFlareon()
       collisionExplosionPosition = flareonPosition //* collision explosion position is now equal to the flareon position so that the explosion will be removed and not just flareon
@@ -213,14 +216,16 @@ function init() {
   }
 
   //* floats collision function starts here
-  function floatsCollision() {
+  function floatCollision() {
     // console.log(cells[floatsArray[0].floatposition])
     if (cells[floatsArray[0].floatposition].classList.contains('flareona')) {
       removeFlareon()
       flareonPosition = floatsArray[0].floatposition - 1
       // console.log(flareonPosition)
-      cells[flareonPosition].classList.add('flareonIdle', 'flareona')
-      console.log(flareonPosition)
+      // cells[flareonPosition].classList.add('flareonIdle', 'flareona')
+      cells[floatsArray[0].floatposition - 1].classList.add('floatAndFlareon','flareonIdle', 'flareona')
+      console.log('floatAndFlareon')
+      // console.log(flareonPosition)
     }
   }
 
@@ -228,6 +233,7 @@ function init() {
   function floats() {
     for (let index = 0; index < floatsArray.length; index++) {
       const x = floatsArray[index].floatposition % width
+      // console.log(x)
       if (x > 0) {
         cells[floatsArray[index].floatposition].classList.remove(floatsArray[index].name)
         cells[floatsArray[index].floatposition - 1].classList.add(floatsArray[index].name) //* adds the property name of the object in the index order using the for loop. Adds and removes dynamically
@@ -241,10 +247,7 @@ function init() {
     } 
   }
 
-  //* win or lose logic function
-  // function winOrLose() {
-  //   if 
-  // }
+
 
   // * Event listeners
   startButton.addEventListener('click', startButton)

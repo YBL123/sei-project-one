@@ -7,6 +7,10 @@ body {
   margin: 0;
 }
 
+.container {
+  position: relative;
+}
+
 .controls-wrapper {
   height: 10vh;
   display: flex;
@@ -77,14 +81,14 @@ body {
 }
 
 /* enemies */
-.grid div.laprusEnemy {
+.grid div.lugiaEnemy {
   background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/abdaa324-0223-4e48-a996-f2a709557acd/d9plj67-e38999f7-d80e-4004-89fa-be205c043638.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FiZGFhMzI0LTAyMjMtNGU0OC1hOTk2LWYyYTcwOTU1N2FjZFwvZDlwbGo2Ny1lMzg5OTlmNy1kODBlLTQwMDQtODlmYS1iZTIwNWMwNDM2MzguZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6TnuR5znY4PHR8A2z31dfgl4PNLNOw0SkqB46b35q-U');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
-.grid div.goldeenEnemy {
+.grid div.lugia2Enemy {
   background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/abdaa324-0223-4e48-a996-f2a709557acd/d7qxfmb-591f0664-3274-4a1b-9f82-cc0c1513d64a.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FiZGFhMzI0LTAyMjMtNGU0OC1hOTk2LWYyYTcwOTU1N2FjZFwvZDdxeGZtYi01OTFmMDY2NC0zMjc0LTRhMWItOWY4Mi1jYzBjMTUxM2Q2NGEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.iE3GGdfEfY5C3JV8JbM0iade43f_0OoURsytoCrOw0U');
   background-repeat: no-repeat;
   background-size: contain;
@@ -105,4 +109,12 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+/* float and flareon together */
+.grid div.floatAndFlareon {
+  background-image: url('../assets/flareonIdle.gif'), url('../assets/Pad_03_1.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat, no-repeat;
 }
