@@ -71,7 +71,32 @@ function init() {
     {
       floatposition: 38,
       name: 'float'
-    }
+    },
+    {
+      floatposition: 40,
+      name: 'float'
+    },
+    {
+      floatposition: 42,
+      name: 'float'
+    },
+    
+    {
+      floatposition: 25,
+      name: 'float'
+    },
+    {
+      floatposition: 23,
+      name: 'float'
+    },
+    {
+      floatposition: 21,
+      name: 'float'
+    },
+    {
+      floatposition: 19,
+      name: 'float'
+    }   
   ]
 
   startGame()    //* Start Game function called here
@@ -172,7 +197,6 @@ function init() {
     } else {
       cells[flareonPosition].classList.add(playerDirection, 'flareona') //* if player is not on flag then only add player direction + flareona class.
     }
-    waterDangerZone() //* water danger zone function is called here 
   }
 
   //* playerOnWater function starts here
@@ -295,6 +319,7 @@ function init() {
         addPlayer('floatAndFlareon') //* adds float and flareon class to show flareon on float
       }
     }
+    waterDangerZone() //* water danger zone function is called here 
   }
 
   //* danger zone function starts here
