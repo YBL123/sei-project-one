@@ -5,8 +5,11 @@ function init() {
   // * Dom Elements
   const grid = document.querySelector('.grid')
   const gameMenu = document.querySelector('.game-menu')
+  const gameOver = document.querySelector('.game-over')
+  const gameWrapper = document.querySelector('.game-wrapper')
   const startButton = document.querySelector('#start')
   const resetButton = document.querySelector('#reset')
+  const playAgainButton = document.querySelector('.play-again-button')
   let cells = []
   const scoreDisplay = document.querySelector('#score-display')
   const remainingLives = document.querySelector('#player-lives')
@@ -140,53 +143,59 @@ function init() {
     }
   ]
   //* initial functions
-
-  resetButton.style.visibility = 'hidden' //* reset button initially hidden as it only needs to be displayed in game menu
+  // gameOverWindow.style.visibility = 'hidden'
 
   //* game initiation. When start button is clicked menu is hidden and game grid becomes visible - then game loads
   function initiateGame() {
-    grid.style.visibility = 'visible'
-    grid.style.display = 'flex'
-    gameMenu.style.visibility = 'hidden'
-    resetButton.style.visibility = 'visible'
+    gameMenu.style.display = 'none'
+    gameWrapper.style.display = 'flex'
+    gameOver.style.display = 'none'
     startGame() //* Start Game function called here
   }
 
   //* reset buton function
   function resetGame() {
+    gameWrapper.style.display = 'none'
+    gameMenu.style.display = 'flex'
+    gameOver.style.display = 'none'
     resetComponents()
-    cells = []
-    gameMenu.style.visibility = 'visible'
-    grid.style.visibility = 'hidden'
-    grid.style.display = 'none'
   }
 
   //* reset components function
   function resetComponents() {
     while (grid.firstChild) {
       grid.removeChild(grid.lastChild)
-    }
-    resetButton.style.visibility = 'hidden'
+    }  
     clearInterval(loopFloats)
     clearInterval(loopEnemies)
-    document.getElementById('player-lives').innerHTML = 5
-    document.getElementById('score-display').innerHTML = 0
+    cells = []
     // * Game variables 
     loopFloats = null
     loopEnemies = null
     playerLives = 5
+    flareonPosition = startingPosition
     playerOnFloatFlag = false
     playerScore = 0
     collisionExplosionPosition = 0
     water = []  //* change to let
   }
 
+  function theGameOver() {
+    gameMenu.style.display = 'none'
+    gameWrapper.style.display = 'none'
+    gameOver.style.display = 'flex'
+    document.querySelector('.final-score').textContent = 'Your Score: ' + playerScore
+    resetComponents()
+    
+  }
 
 
 
   // * Game Functions
   function startGame() {
     createGrid()
+    document.getElementById('player-lives').innerHTML = playerLives
+    document.getElementById('score-display').innerHTML = playerScore
     // * Event listeners
     window.addEventListener('keydown', handleKeyDown)
     addPlayer('flareonIdle') //* adds player
@@ -233,17 +242,17 @@ function init() {
         }
         break
       default:
-        console.log('invalid key do nothing')
+        console.log('invalid key do nothing') //* comment out later
     }
 
-    setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
-      cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
-      cells[flareonPosition].classList.remove('flareonRunRight')
-      cells[flareonPosition].classList.remove('flareonRunLeft')
-      cells[flareonPosition].classList.remove('flareonRunUp')
-      cells[flareonPosition].classList.remove('flareonRunDown')
-      cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
-    }, 1000)
+    // setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
+    //   cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
+    //   cells[flareonPosition].classList.remove('flareonRunRight')
+    //   cells[flareonPosition].classList.remove('flareonRunLeft')
+    //   cells[flareonPosition].classList.remove('flareonRunUp')
+    //   cells[flareonPosition].classList.remove('flareonRunDown')
+    //   cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
+    // }, 1000)
 
     //* calling win logic function below
     winLogic()
@@ -253,7 +262,7 @@ function init() {
   function winLogic() {
     //* gameScore if statement begins here 
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {  //* end points
-      console.log('at the end')
+      console.log('at the end') //* need to comment out
       playerScore += 150
       scoreDisplay.textContent = playerScore   //* prints score points ends here
       //* checking to see if all end points contain the shared class of 'flareona'. once all end points contain a 'flareona' class - player wins the game.
@@ -349,8 +358,7 @@ function init() {
     playerLives--     //* so player lives will decrease when you "die"
     remainingLives.textContent = playerLives  //* prints number of lives remaining here
     if (playerLives === 0) {   //* if plyaer loses all lives
-      clearTimeout(loopGame)   //* stops game loop when player dies
-      alert('GAME OVER')
+      setTimeout(theGameOver, 500)
     } else {
       flareonPosition = startingPosition    //* takes player back to starting position
       addPlayer('flareonIdle')
@@ -419,7 +427,7 @@ function init() {
 
 
 
-
+  playAgainButton.addEventListener('click', resetGame)  //* goes back to main menu
   startButton.addEventListener('click', initiateGame)
   resetButton.addEventListener('click', resetGame)
 
