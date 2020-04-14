@@ -4,7 +4,7 @@ function init() {
 
   // * Dom Elements
   const grid = document.querySelector('.grid')
-  const menu = document.querySelector('.game-menu')
+  const gameMenu = document.querySelector('.game-menu')
   const startButton = document.querySelector('#start')
   const resetButton = document.querySelector('#reset')
   let cells = []
@@ -141,11 +141,14 @@ function init() {
   ]
   //* initial functions
 
+  resetButton.style.visibility = 'hidden' //* reset button initially hidden as it only needs to be displayed in game menu
+
   //* game initiation. When start button is clicked menu is hidden and game grid becomes visible - then game loads
   function initiateGame() {
     grid.style.visibility = 'visible'
     grid.style.display = 'flex'
-    menu.style.visibility = 'hidden'
+    gameMenu.style.visibility = 'hidden'
+    resetButton.style.visibility = 'visible'
     startGame() //* Start Game function called here
   }
 
@@ -153,7 +156,7 @@ function init() {
   function resetGame() {
     resetComponents()
     cells = []
-    menu.style.visibility = 'visible'
+    gameMenu.style.visibility = 'visible'
     grid.style.visibility = 'hidden'
     grid.style.display = 'none'
   }
@@ -163,6 +166,7 @@ function init() {
     while (grid.firstChild) {
       grid.removeChild(grid.lastChild)
     }
+    resetButton.style.visibility = 'hidden'
     clearInterval(loopFloats)
     clearInterval(loopEnemies)
     document.getElementById('player-lives').innerHTML = 5
@@ -179,7 +183,7 @@ function init() {
 
 
 
-  
+
   // * Game Functions
   function startGame() {
     createGrid()
@@ -198,7 +202,7 @@ function init() {
       cell.textContent = i //take out later
     }
   }
-  
+
   //* handle key down function starts here 
   function handleKeyDown(event) {
     const x = flareonPosition % width

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Project One</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="scripts/app.js" charset="utf-8"></script>
-  </head>
-  <body>
-    <div class="game-menu">
-      <h1>Falreon</h1>
-      <h2>Frogger</h2>
-      <button id="start">Start!</button>
+
+<head>
+  <meta charset="utf-8">
+  <title>Project One</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="scripts/app.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <div class="game-menu">
+    <h1>Falreon</h1>
+    <h2>Frogger</h2>
+    <button id="start">Start!</button>
+  </div>
+  <div class="controls-wrapper">
+    <p>Lives: <span id="player-lives">5</span></p>
+    <p>Score: <span id="score-display">0</span></p>
+  </div>
+  <div class="grid-wrapper">
+    <button id="reset" class="reset">reset</button>
+    <div class="grid">
     </div>
-    <div class="controls-wrapper"> 
-      <p>Lives: <span id="player-lives">5</span></p>
-      <p>Score: <span id="score-display">0</span></p>
-    </div>
-    <div class="grid-wrapper">
-      <div class="grid"></div>
-      <button id="reset">reset</button>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
