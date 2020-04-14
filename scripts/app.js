@@ -13,6 +13,8 @@ function init() {
   const cellCount = (width * width) + (width * 2)
 
   // * Game variables 
+  let loopFloats = null
+  let loopEnemies = null
   let playerLives = 3
   const startingPosition = 94
   let flareonPosition = 94
@@ -63,7 +65,9 @@ function init() {
       name: 'lugiaEnemy'
     }
   ]
-  const floatsArray = [           //* floats array
+  //* floats array
+  const floatsArray = [
+    //* first row of floats
     {
       floatposition: 36,
       name: 'float'
@@ -80,7 +84,24 @@ function init() {
       floatposition: 42,
       name: 'float'
     },
-    
+    //* second row of floats
+    {
+      floatposition: 33,
+      name: 'float'
+    },
+    {
+      floatposition: 32,
+      name: 'float'
+    },
+    {
+      floatposition: 31,
+      name: 'float'
+    },
+    {
+      floatposition: 30,
+      name: 'float'
+    },
+    //* third row of floats
     {
       floatposition: 25,
       name: 'float'
@@ -96,7 +117,24 @@ function init() {
     {
       floatposition: 19,
       name: 'float'
-    }   
+    },
+    //* fourth row of floats
+    {
+      floatposition: 9,
+      name: 'float'
+    },
+    {
+      floatposition: 10,
+      name: 'float'
+    },
+    {
+      floatposition: 11,
+      name: 'float'
+    },
+    {
+      floatposition: 12,
+      name: 'float'
+    }
   ]
 
   startGame()    //* Start Game function called here
@@ -109,6 +147,7 @@ function init() {
     loopGame() //* loops game
   }
 
+  //* create grid function starts here
   function createGrid() {                    //* creates grid and then cells
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
@@ -117,7 +156,8 @@ function init() {
       cell.textContent = i //take out later
     }
   }
-
+  
+  //* handle key down function starts here 
   function handleKeyDown(event) {
     const x = flareonPosition % width
     const y = Math.floor(flareonPosition / width)
@@ -165,8 +205,6 @@ function init() {
 
   //* win logic function begins here
   function winLogic() {
-
-    // console.log(flareonPosition)
     //* gameScore if statement begins here 
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {  //* end points
       console.log('at the end')
@@ -195,11 +233,12 @@ function init() {
     if (playerOnFloatFlag) {
       cells[flareonPosition].classList.add('floatAndFlareon', 'flareona') //* if player is on float then add float and flareon class + flareona class.
     } else {
+      // displayFloats()  //* 14/04/20 testing this out remove if doesn't work 
       cells[flareonPosition].classList.add(playerDirection, 'flareona') //* if player is not on flag then only add player direction + flareona class.
     }
   }
 
-  //* playerOnWater function starts here
+  //* playerOnFloat function starts here
   function playerOnFloat() {
     for (let index = 0; index < floatsArray.length; index++) {
       if (floatsArray[index].floatposition === flareonPosition) {
@@ -212,12 +251,12 @@ function init() {
 
   //* loop game function starts here
   function loopGame() {   //* called in createGrid function
-    setTimeout(loopGame, 500)
-    // console.log(flareonPosition)
-    moveEnemies() //* calling moveEnemies function here so that enemies can move
-    // enemyCollision() //* collision function called here
-    moveFloats()  //* floats function called here
-    // floatCollision() //* float collision function called here
+    // setTimeout(loopGame, 500)
+    console.log(flareonPosition)
+    // moveEnemies() //* calling moveEnemies function here so that enemies can move
+    // moveFloats()  //* floats function called here
+    loopFloats = setInterval(moveFloats, 500) //* floats function called here
+    loopEnemies = setInterval(moveEnemies, 500) //* calling moveEnemies function here so that enemies can move
   }
 
   //* move enemies function starts here 
@@ -272,7 +311,7 @@ function init() {
       flareonPosition = startingPosition    //* takes player back to starting position
       addPlayer('flareonIdle')
     }
-    
+
   }
 
   //* remove flareon function begins here 
@@ -311,7 +350,7 @@ function init() {
     cells.forEach(cell => cell.classList.remove('float', 'floatAndFlareon'))
   }
 
-  //* floats collision function starts here
+  //* floats positive collision function starts here
   function floatCollision() {
     for (let index = 0; index < floatsArray.length; index++) {
       if (floatsArray[index].floatposition === flareonPosition - 1) {  //* checking if float position is equal to flareon position. The flareon position is decreased by one in order for float position to chase after flareon position. 
@@ -324,9 +363,9 @@ function init() {
 
   //* danger zone function starts here
   function waterDangerZone() {
-    // water = cells.slice(9, 44) //* selects all indexes ranging from 9 - 44 for danger zone/water
+    //* selects all indexes ranging from 9 - 44 for danger zone/water
     if (flareonPosition >= 9 && flareonPosition <= 44 && !cells[flareonPosition].classList.contains('floatAndFlareon')) {
-      nextFlareon() 
+      nextFlareon()
     }
   }
 

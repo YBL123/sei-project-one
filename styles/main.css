@@ -108,6 +108,7 @@ body {
   background-image: url('../assets/Pad_04_1.png');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: bottom;
   cursor: pointer;
 }
 
