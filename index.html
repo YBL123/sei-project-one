@@ -7,14 +7,18 @@
     <script src="scripts/app.js" charset="utf-8"></script>
   </head>
   <body>
-    <div class="container"></div>
-    <div class="controls-wrapper">
+    <div class="game-menu">
+      <h1>Falreon</h1>
+      <h2>Frogger</h2>
       <button id="start">Start!</button>
+    </div>
+    <div class="controls-wrapper"> 
+      <p>Lives: <span id="player-lives">5</span></p>
       <p>Score: <span id="score-display">0</span></p>
     </div>
     <div class="grid-wrapper">
       <div class="grid"></div>
+      <button id="reset">reset</button>
     </div>
-  </div>
   </body>
 </html>

@@ -4,9 +4,12 @@ function init() {
 
   // * Dom Elements
   const grid = document.querySelector('.grid')
-  // const startButton = document.querySelector('#start')
-  const cells = []
+  const menu = document.querySelector('.game-menu')
+  const startButton = document.querySelector('#start')
+  const resetButton = document.querySelector('#reset')
+  let cells = []
   const scoreDisplay = document.querySelector('#score-display')
+  const remainingLives = document.querySelector('#player-lives')
 
   // * Grid variables
   const width = 9
@@ -15,13 +18,13 @@ function init() {
   // * Game variables 
   let loopFloats = null
   let loopEnemies = null
-  let playerLives = 3
+  let playerLives = 5
   const startingPosition = 94
   let flareonPosition = 94
   let playerOnFloatFlag = false
   let playerScore = 0
   let collisionExplosionPosition = 0
-  const water = []  //* change to let
+  let water = []  //* change to let
 
   const enemiesArray = [   //* enemy array
     {
@@ -136,13 +139,52 @@ function init() {
       name: 'float'
     }
   ]
+  //* initial functions
 
-  startGame()    //* Start Game function called here
-  // * Functions
+  //* game initiation. When start button is clicked menu is hidden and game grid becomes visible - then game loads
+  function initiateGame() {
+    grid.style.visibility = 'visible'
+    grid.style.display = 'flex'
+    menu.style.visibility = 'hidden'
+    startGame() //* Start Game function called here
+  }
+
+  //* reset buton function
+  function resetGame() {
+    resetComponents()
+    cells = []
+    menu.style.visibility = 'visible'
+    grid.style.visibility = 'hidden'
+    grid.style.display = 'none'
+  }
+
+  //* reset components function
+  function resetComponents() {
+    while (grid.firstChild) {
+      grid.removeChild(grid.lastChild)
+    }
+    clearInterval(loopFloats)
+    clearInterval(loopEnemies)
+    document.getElementById('player-lives').innerHTML = 5
+    document.getElementById('score-display').innerHTML = 0
+    // * Game variables 
+    loopFloats = null
+    loopEnemies = null
+    playerLives = 5
+    playerOnFloatFlag = false
+    playerScore = 0
+    collisionExplosionPosition = 0
+    water = []  //* change to let
+  }
+
+
+
+  
+  // * Game Functions
   function startGame() {
     createGrid()
     // * Event listeners
-    document.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown)
     addPlayer('flareonIdle') //* adds player
     loopGame() //* loops game
   }
@@ -251,10 +293,7 @@ function init() {
 
   //* loop game function starts here
   function loopGame() {   //* called in createGrid function
-    // setTimeout(loopGame, 500)
-    console.log(flareonPosition)
-    // moveEnemies() //* calling moveEnemies function here so that enemies can move
-    // moveFloats()  //* floats function called here
+    console.log(flareonPosition)   //* comment this out later
     loopFloats = setInterval(moveFloats, 500) //* floats function called here
     loopEnemies = setInterval(moveEnemies, 500) //* calling moveEnemies function here so that enemies can move
   }
@@ -304,6 +343,7 @@ function init() {
   //* next flareon function begins here - spawns the next sprite once one sprite has reached an end point
   function nextFlareon() {
     playerLives--     //* so player lives will decrease when you "die"
+    remainingLives.textContent = playerLives  //* prints number of lives remaining here
     if (playerLives === 0) {   //* if plyaer loses all lives
       clearTimeout(loopGame)   //* stops game loop when player dies
       alert('GAME OVER')
@@ -376,7 +416,8 @@ function init() {
 
 
 
-
+  startButton.addEventListener('click', initiateGame)
+  resetButton.addEventListener('click', resetGame)
 
 
 
