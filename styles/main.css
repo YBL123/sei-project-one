@@ -37,6 +37,11 @@ body {
   height: 200px;
 }
 
+.active-button {
+  background-color: yellow;
+  
+}
+
 .game-menu .difficulty-button {
   padding: 15px;
     border: none;

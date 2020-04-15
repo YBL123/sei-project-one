@@ -20,7 +20,7 @@
         <p>This is how you play</p>
       </div>
       <div class="difficulty">
-        <input type="button" class="difficulty-button" value="easy">
+        <input type="button" class="difficulty-button active-button" value="easy">
         <input type="button" class="difficulty-button" value="medium">
         <input type="button" class="difficulty-button" value="hard">
       </div>
@@ -55,7 +55,9 @@
 
     <div class="game-wrapper">    <!-- formerly grid-wraper -->  
       <div class="controls-wrapper">
-        <p>Lives: <span id="player-lives">5</span></p>
+        <p>Lives: <span id="player-lives" value="easy">5</span></p>
+          <!-- <p>Lives: <span id="player-lives" value="medium">3</span></p>
+          <p>Lives: <span id="player-lives" value="hard">1</span></p> -->
         <p>Score: <span id="score-display">0</span></p>
       </div>
       <div class="grid">
@@ -66,6 +68,9 @@
     </div>
 
   </div>
+  
+  <audio></audio>
+  
 </body>
 
 </html>

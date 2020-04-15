@@ -11,9 +11,11 @@ function init() {
   const startButton = document.querySelector('#start')
   const resetButton = document.querySelector('#reset')
   const playAgainButton = document.querySelector('.play-again-button')
+  const difficultyButtons = document.querySelectorAll('.difficulty-button')   //* difficulty buttons
   let cells = []
   const scoreDisplay = document.querySelector('#score-display')
   const remainingLives = document.querySelector('#player-lives')
+  const sound = document.querySelector('audio')
 
   // * Grid variables
   const width = 9
@@ -31,7 +33,23 @@ function init() {
   let playerScore = 0
   let collisionExplosionPosition = 0
   let splashPosition = 0
-  let water = []  //* change to let
+
+  //* game sounds
+  const gameSounds = {
+    backgroundSound: '../sounds/backgroundSound.mp3',
+    splashSound: '../sounds/splashSound.mp3',
+    movementSound: '../sounds/movementSoound.mp3',
+    winSound: '../sounds/winSound.mp3',
+    gameOverSound: '../sounds/gameOverSound.mp3',
+    explosionSound: '../sounds/explosionSound.mp3'
+  }
+
+  function playAudio(event) {  //* event is the argument 
+    sound.src = event //* sound is now = to query selector + src
+    sound.play()
+  }
+
+
 
   const enemiesArray = [   //* enemy array
     {
@@ -147,7 +165,28 @@ function init() {
     }
   ]
   //* initial functions
-  // gameOverWindow.style.visibility = 'hidden'
+
+  //* game difficulty    matching values  takes the even target value and matches the button value with cases
+  function gameDifficulty(event) {
+    difficultyButtons.forEach(button => {     //* removes active button class from all so all buttons start without it.
+      button.classList.remove('active-button')
+    })
+    this.classList.add('active-button')  //* this refers to the button being clicked.
+    switch (event.target.value) {
+      case 'easy':
+        playerLives = 5
+        break
+      case 'medium':
+        playerLives = 3
+        break
+      case 'hard':
+        playerLives = 1
+        break
+      default:
+        playerLives = 5
+    }
+    console.log(playerLives)
+  }
 
   //* game initiation. When start button is clicked menu is hidden and game grid becomes visible - then game loads
   function initiateGame() {
@@ -183,7 +222,6 @@ function init() {
     playerOnFloatFlag = false
     playerScore = 0
     collisionExplosionPosition = 0
-    water = []  //* change to let
   }
 
   //* the game won function
@@ -215,6 +253,7 @@ function init() {
     document.getElementById('score-display').innerHTML = playerScore
     // * Event listeners
     window.addEventListener('keydown', handleKeyDown)
+    playAudio(gameSounds.backgroundSound) //* Calls the background sound audio
     addPlayer('flareonIdle') //* adds player
     loopGame() //* loops game
   }
@@ -404,13 +443,6 @@ function init() {
       }
     })
   }
-  // cells.forEach(function (currentValue, index) {
-  //   if (index !== 1 && index !== 3 && index !== 5 && index !== 7) {  //* if it's not one of the end indexes then continue
-  //     // console.log('remove')
-  //     return currentValue.classList.remove('flareonIdle', 'flareonRunUp', 'flareonRunRight', 'flareonRunLeft', 'flareonRunDown', 'flareona') // * remove flareon class from old position
-  //   }
-  // })
-  // }
 
   //* move floats function starts here
   function moveFloats() {
@@ -477,6 +509,10 @@ function init() {
   playAgainButton.addEventListener('click', resetGame)  //* goes back to main menu
   startButton.addEventListener('click', initiateGame)
   resetButton.addEventListener('click', resetGame)
+  difficultyButtons.forEach(button => {
+    button.addEventListener('click', gameDifficulty) //* difficulty buttons
+  })
+  
 
 
 
