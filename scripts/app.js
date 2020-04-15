@@ -192,7 +192,7 @@ function init() {
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
     gameOver.style.display = 'none'
-    document.querySelector('.final-score').textContent = 'Your Score: ' + playerScore
+    document.querySelector('.final-score2').textContent = 'Your Score: ' + playerScore
     resetComponents()
   }
 
@@ -473,7 +473,7 @@ function init() {
 
 
 
-
+  document.querySelector('.play-again-button2').addEventListener('click', resetGame)
   playAgainButton.addEventListener('click', resetGame)  //* goes back to main menu
   startButton.addEventListener('click', initiateGame)
   resetButton.addEventListener('click', resetGame)
