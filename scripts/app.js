@@ -19,11 +19,13 @@ function init() {
   const cellCount = (width * width) + (width * 2)
 
   // * Game variables 
+  let verticalMovement
   let loopFloats = null
   let loopEnemies = null
   let playerLives = 5
   const startingPosition = 94
   let flareonPosition = 94
+  let playerWinFlag = false
   let playerOnFloatFlag = false
   let playerScore = 0
   let collisionExplosionPosition = 0
@@ -165,7 +167,7 @@ function init() {
   function resetComponents() {
     while (grid.firstChild) {
       grid.removeChild(grid.lastChild)
-    }  
+    }
     clearInterval(loopFloats)
     clearInterval(loopEnemies)
     cells = []
@@ -186,7 +188,7 @@ function init() {
     gameOver.style.display = 'flex'
     document.querySelector('.final-score').textContent = 'Your Score: ' + playerScore
     resetComponents()
-    
+
   }
 
 
@@ -219,24 +221,29 @@ function init() {
     switch (event.keyCode) { // * calculate the new index
       case 39:
         if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going right you may go in. If there is you may not.
+          verticalMovement = false
           flareonPosition++ //* right 
+          console.log('allowed')
           addPlayer('flareonRunRight')
         }
         break
       case 37:
         if ((x > 0) && (!cells[flareonPosition - 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going left, you may go in. If there is you may not.
+          verticalMovement = false
           flareonPosition-- //* left
           addPlayer('flareonRunLeft')
         }
         break
       case 38:
         if ((y > 0) && (!cells[flareonPosition - width].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going up, you may go in. If there is you may not.
+          verticalMovement = true
           flareonPosition -= width //* up
           addPlayer('flareonRunUp')
         }
         break
       case 40:
         if (y < width + 1) {
+          verticalMovement = true
           flareonPosition += width //* down
           addPlayer('flareonRunDown')
         }
@@ -245,6 +252,7 @@ function init() {
         console.log('invalid key do nothing') //* comment out later
     }
 
+    //* this may need to be commented out
     // setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
     //   cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
     //   cells[flareonPosition].classList.remove('flareonRunRight')
@@ -274,6 +282,7 @@ function init() {
         }, 100)
 
       } else {
+        playerWinFlag = true
         nextFlareon()  //* next flareon function called here. Spawns next flareon once one of the 4 reach an end point.
       }
     }
@@ -282,13 +291,15 @@ function init() {
 
   //* add player function starts here
   function addPlayer(playerDirection) {     //* player direction is the direction the player will be taking 
+    // cells.forEach(cell => cell.classList.remove('floatAndFlareon', 'flareona')) //* removes flareon and flareon on float
+    console.log('moving')
+    console.log(flareonPosition)   //* comment this out later
     //* character creation
     removeFlareon() //* so when a new flareon is spawned in event of collision or "death" the previous one will be removed from the board
     playerOnFloat() //* player on float function is called here. This way the playeronfloat variable will update and let me know if it's true or false.
     if (playerOnFloatFlag) {
       cells[flareonPosition].classList.add('floatAndFlareon', 'flareona') //* if player is on float then add float and flareon class + flareona class.
     } else {
-      // displayFloats()  //* 14/04/20 testing this out remove if doesn't work 
       cells[flareonPosition].classList.add(playerDirection, 'flareona') //* if player is not on flag then only add player direction + flareona class.
     }
   }
@@ -306,9 +317,9 @@ function init() {
 
   //* loop game function starts here
   function loopGame() {   //* called in createGrid function
-    console.log(flareonPosition)   //* comment this out later
-    loopFloats = setInterval(moveFloats, 500) //* floats function called here
-    loopEnemies = setInterval(moveEnemies, 500) //* calling moveEnemies function here so that enemies can move
+    // console.log(flareonPosition)   //* comment this out later
+    loopFloats = setInterval(moveFloats, 1000) //* floats function called here
+    loopEnemies = setInterval(moveEnemies, 1000) //* calling moveEnemies function here so that enemies can move
   }
 
   //* move enemies function starts here 
@@ -353,18 +364,23 @@ function init() {
     }
   }
 
-  //* next flareon function begins here - spawns the next sprite once one sprite has reached an end point
-  function nextFlareon() {
-    playerLives--     //* so player lives will decrease when you "die"
+  //* next flareon function begins here - spawns the next sprite once one sprite has reached an end point + decreases number of lives when player is in enemy collision and water danger zone
+  function nextFlareon() {     //* need to fix this function so that it doesn't decrease life when reaching end points and respawning!!!!!!!
+    flareonPosition = startingPosition    //* takes player back to starting position
+    if (!playerWinFlag) {
+      playerLives--     //* so player lives will decrease when you "die"
+    } 
+    playerWinFlag = false
     remainingLives.textContent = playerLives  //* prints number of lives remaining here
     if (playerLives === 0) {   //* if plyaer loses all lives
       setTimeout(theGameOver, 500)
     } else {
-      flareonPosition = startingPosition    //* takes player back to starting position
+      console.log('allowing you to add player')
       addPlayer('flareonIdle')
     }
 
   }
+
 
   //* remove flareon function begins here 
   function removeFlareon() {
@@ -405,9 +421,13 @@ function init() {
   //* floats positive collision function starts here
   function floatCollision() {
     for (let index = 0; index < floatsArray.length; index++) {
+      console.log(floatsArray[index].floatposition === flareonPosition - 1 && verticalMovement)
       if (floatsArray[index].floatposition === flareonPosition - 1) {  //* checking if float position is equal to flareon position. The flareon position is decreased by one in order for float position to chase after flareon position. 
         flareonPosition--   //* if statement above is true , then flareon position is reassigned. (flareon position = flareon position -1). This way the flareon position is one step ahead allows the float position to chase it.
         addPlayer('floatAndFlareon') //* adds float and flareon class to show flareon on float
+        // if (cells[flareonPosition + 1]){
+
+        // }
       }
     }
     waterDangerZone() //* water danger zone function is called here 
