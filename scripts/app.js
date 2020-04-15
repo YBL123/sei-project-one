@@ -34,21 +34,6 @@ function init() {
   let collisionExplosionPosition = 0
   let splashPosition = 0
 
-  //* game sounds
-  const gameSounds = {
-    backgroundSound: '../sounds/backgroundSound.mp3',
-    splashSound: '../sounds/splashSound.mp3',
-    movementSound: '../sounds/movementSoound.mp3',
-    winSound: '../sounds/winSound.mp3',
-    gameOverSound: '../sounds/gameOverSound.mp3',
-    explosionSound: '../sounds/explosionSound.mp3'
-  }
-
-  function playAudio(event) {  //* event is the argument 
-    sound.src = event //* sound is now = to query selector + src
-    sound.play()
-  }
-
 
 
   const enemiesArray = [   //* enemy array
@@ -249,11 +234,16 @@ function init() {
   // * Game Functions
   function startGame() {
     createGrid()
+    style()
+    PlayExplosionSound()
     document.getElementById('player-lives').innerHTML = playerLives
     document.getElementById('score-display').innerHTML = playerScore
     // * Event listeners
     window.addEventListener('keydown', handleKeyDown)
-    playAudio(gameSounds.backgroundSound) //* Calls the background sound audio
+    // setTimeout(() => {
+    //   playAudio(gameSounds.backgroundSound)
+    // }, 200)
+    // playAudio(gameSounds.backgroundSound) //* Calls the background sound audio
     addPlayer('flareonIdle') //* adds player
     loopGame() //* loops game
   }
@@ -405,6 +395,7 @@ function init() {
   function enemyCollision() {
     if (cells[flareonPosition].classList.contains('lugiaEnemy') || cells[flareonPosition].classList.contains('lugia2Enemy')) {
       cells[flareonPosition].classList.add('collision')
+      PlayExplosionSound() //* explosion sound called here!
       removeFlareon()
       collisionExplosionPosition = flareonPosition //* collision explosion position is now equal to the flareon position so that the explosion will be removed and not just flareon
       setTimeout(function () {
@@ -477,9 +468,6 @@ function init() {
       if (floatsArray[index].floatposition === flareonPosition - 1) {  //* checking if float position is equal to flareon position. The flareon position is decreased by one in order for float position to chase after flareon position. 
         flareonPosition--   //* if statement above is true , then flareon position is reassigned. (flareon position = flareon position -1). This way the flareon position is one step ahead allows the float position to chase it.
         addPlayer('floatAndFlareon') //* adds float and flareon class to show flareon on float
-        // if (cells[flareonPosition + 1]){
-
-        // }
       }
     }
     waterDangerZone() //* water danger zone function is called here 
@@ -490,6 +478,7 @@ function init() {
     //* selects all indexes ranging from 9 - 44 for danger zone/water
     if (flareonPosition >= 9 && flareonPosition <= 44 && !cells[flareonPosition].classList.contains('floatAndFlareon', 'flareona')) {
       cells[flareonPosition].classList.add('splash')
+      PlaySplashSound()  //* splash sound!
       removeFlareon()
       splashPosition = flareonPosition //* splash position is now equal to the flareon position so that the splash will be removed and not just flareon
       setTimeout(function () {
@@ -501,8 +490,51 @@ function init() {
   }
 
 
+  //* style
+
+  function style() {
+    cells.forEach((cell, index) => {
+      if (index >= 90 && index <= 98) {
+        cell.style.backgroundColor = 'red'
+      }
+      if (index >= 54 && index <= 89) {
+        cell.style.backgroundColor = 'green'
+        // cell.style.backgroundImage = ('url(\'https://media.giphy.com/media/yTrcALesdjU5O/giphy.gif\')')
+      }
+      if (index >= 45 && index <= 53) {
+        cell.style.backgroundColor = 'red'
+      }
+      if (index >= 9 && index <= 44) {
+        cell.style.backgroundColor = 'blue'
+      }
+      if (index === 0 || index === 2 || index === 4 || index === 6 || index === 8) {   //* end points
+        cell.style.backgroundColor = 'red'
+      }
+      if (index === 1 || index === 3 || index === 5 || index === 7) {
+        cell.style.backgroundColor = 'orange'
+      }
+    })
+  }
 
 
+  //* game sounds
+  function PlaySplashSound() {
+    const splashAudio = new Audio('./sounds/splashSound.mp3')
+    splashAudio.loop = false
+    splashAudio.play() 
+  }
+  
+  function PlayExplosionSound() {
+    const ExplosionAudio = new Audio('./sounds/explosionSound.mp3')
+    ExplosionAudio.loop = false
+    ExplosionAudio.play() 
+  }
+
+  function PlayExplosionSound() {
+    const mainGameAudio = new Audio('./sounds/backgroundSound.mp3')
+    mainGameAudio.loop = false
+    mainGameAudio.play() 
+  }
 
 
   document.querySelector('.play-again-button2').addEventListener('click', resetGame)

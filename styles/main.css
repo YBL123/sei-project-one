@@ -5,6 +5,7 @@
 body {
   height: 100vh;
   margin: 0;
+  background-color: black;
 }
 
 .container {
@@ -39,7 +40,7 @@ body {
 
 .active-button {
   background-color: yellow;
-  
+
 }
 
 .game-menu .difficulty-button {
