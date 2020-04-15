@@ -5,6 +5,7 @@ function init() {
   // * Dom Elements
   const grid = document.querySelector('.grid')
   const gameMenu = document.querySelector('.game-menu')
+  const gameWon = document.querySelector('.game-won')
   const gameOver = document.querySelector('.game-over')
   const gameWrapper = document.querySelector('.game-wrapper')
   const startButton = document.querySelector('#start')
@@ -29,6 +30,7 @@ function init() {
   let playerOnFloatFlag = false
   let playerScore = 0
   let collisionExplosionPosition = 0
+  let splashPosition = 0
   let water = []  //* change to let
 
   const enemiesArray = [   //* enemy array
@@ -152,6 +154,7 @@ function init() {
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'flex'
     gameOver.style.display = 'none'
+    gameWon.style.display = 'none'
     startGame() //* Start Game function called here
   }
 
@@ -160,6 +163,7 @@ function init() {
     gameWrapper.style.display = 'none'
     gameMenu.style.display = 'flex'
     gameOver.style.display = 'none'
+    gameWon.style.display = 'none'
     resetComponents()
   }
 
@@ -182,13 +186,24 @@ function init() {
     water = []  //* change to let
   }
 
-  function theGameOver() {
+  //* the game won function
+  function theGameWon() {
+    gameWon.style.display = 'flex'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
-    gameOver.style.display = 'flex'
+    gameOver.style.display = 'none'
     document.querySelector('.final-score').textContent = 'Your Score: ' + playerScore
     resetComponents()
+  }
 
+  //* the game over function
+  function theGameOver() {
+    gameOver.style.display = 'flex'
+    gameMenu.style.display = 'none'
+    gameWrapper.style.display = 'none'
+    gameWon.style.display = 'none'
+    document.querySelector('.final-score').textContent = 'Your Score: ' + playerScore
+    resetComponents()
   }
 
 
@@ -277,9 +292,7 @@ function init() {
       if (cells[1].classList.contains('flareona') && cells[3].classList.contains('flareona') &&    //* flareona class so it doesn't depend on what arrow key used to get into end point
         cells[5].classList.contains('flareona') && cells[7].classList.contains('flareona')) {
         //* timer for 'win!' alert
-        setTimeout(function () {
-          window.alert('win!')
-        }, 100)
+        setTimeout(theGameWon, 500)
 
       } else {
         playerWinFlag = true
@@ -318,8 +331,8 @@ function init() {
   //* loop game function starts here
   function loopGame() {   //* called in createGrid function
     // console.log(flareonPosition)   //* comment this out later
-    loopFloats = setInterval(moveFloats, 1000) //* floats function called here
-    loopEnemies = setInterval(moveEnemies, 1000) //* calling moveEnemies function here so that enemies can move
+    loopFloats = setInterval(moveFloats, 500) //* floats function called here
+    loopEnemies = setInterval(moveEnemies, 500) //* calling moveEnemies function here so that enemies can move
   }
 
   //* move enemies function starts here 
@@ -369,7 +382,7 @@ function init() {
     flareonPosition = startingPosition    //* takes player back to starting position
     if (!playerWinFlag) {
       playerLives--     //* so player lives will decrease when you "die"
-    } 
+    }
     playerWinFlag = false
     remainingLives.textContent = playerLives  //* prints number of lives remaining here
     if (playerLives === 0) {   //* if plyaer loses all lives
@@ -384,13 +397,20 @@ function init() {
 
   //* remove flareon function begins here 
   function removeFlareon() {
-    cells.forEach(function (currentValue, index) {
+    cells.forEach((currentValue, index) => {
       if (index !== 1 && index !== 3 && index !== 5 && index !== 7) {  //* if it's not one of the end indexes then continue
         // console.log('remove')
         return currentValue.classList.remove('flareonIdle', 'flareonRunUp', 'flareonRunRight', 'flareonRunLeft', 'flareonRunDown', 'flareona') // * remove flareon class from old position
       }
     })
   }
+  // cells.forEach(function (currentValue, index) {
+  //   if (index !== 1 && index !== 3 && index !== 5 && index !== 7) {  //* if it's not one of the end indexes then continue
+  //     // console.log('remove')
+  //     return currentValue.classList.remove('flareonIdle', 'flareonRunUp', 'flareonRunRight', 'flareonRunLeft', 'flareonRunDown', 'flareona') // * remove flareon class from old position
+  //   }
+  // })
+  // }
 
   //* move floats function starts here
   function moveFloats() {
@@ -436,7 +456,14 @@ function init() {
   //* danger zone function starts here
   function waterDangerZone() {
     //* selects all indexes ranging from 9 - 44 for danger zone/water
-    if (flareonPosition >= 9 && flareonPosition <= 44 && !cells[flareonPosition].classList.contains('floatAndFlareon')) {
+    if (flareonPosition >= 9 && flareonPosition <= 44 && !cells[flareonPosition].classList.contains('floatAndFlareon', 'flareona')) {
+      cells[flareonPosition].classList.add('splash')
+      removeFlareon()
+      splashPosition = flareonPosition //* splash position is now equal to the flareon position so that the splash will be removed and not just flareon
+      setTimeout(function () {
+        // console.log(collisionExplosionPosition) 
+        cells[splashPosition].classList.remove('splash')
+      }, 250)
       nextFlareon()
     }
   }
