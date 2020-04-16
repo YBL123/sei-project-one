@@ -52,7 +52,11 @@ body {
 }
 
 .game-menu div {
-  margin: 10px 0;
+  /* margin: 10px 0; */
+}
+
+.game-menu .difficulty {
+  padding: 0px 0 22px;
 }
 
 .game-menu .game-instructions {
@@ -155,6 +159,9 @@ body {
   font-weight: 500;
 }
 
+.game-won button:hover {
+  background-color: gold;
+}
 
 .game-over {
   display: none;     /* should be flex   */
@@ -194,6 +201,9 @@ body {
   font-size: 15px;
   font-weight: 500;
   color: black;
+}
+.game-over button:hover {
+  background-color: gold;
 }
 
 .game-over .final-score {
