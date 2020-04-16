@@ -38,45 +38,55 @@ function init() {
 
 
   const enemiesArray = [   //* enemy array
+
+    //* first row of enemies
     {
-      enemyposition: 81,    //* position property and the value is the index in which the enemy will first be positioned
-      name: 'lugiaEnemy'
+      enemyposition: 89,    //* position property and the value is the index in which the enemy will first be positioned
+      name: 'lugiaEnemy',
+      direction: 'left'
     },
     {
-      enemyposition: 88,
-      name: 'lugiaEnemy'
+      enemyposition: 86,
+      name: 'lugiaEnemy',
+      direction: 'left'
+    },
+    //* second row of enemies
+    {
+      enemyposition: 72,
+      name: 'lugia2Enemy',
+      direction: 'right'
     },
     {
-      enemyposition: 80,
-      name: 'lugia2Enemy'
+      enemyposition: 74,
+      name: 'lugia2Enemy',
+      direction: 'right'
+    },
+    //* third row of enemies
+    {
+      enemyposition: 70,
+      name: 'lugiaEnemy',
+      direction: 'left'
     },
     {
-      enemyposition: 78,
-      name: 'lugiaEnemy'
+      enemyposition: 67,
+      name: 'lugiaEnemy',
+      direction: 'left'
     },
-    {
-      enemyposition: 79,
-      name: 'lugia2Enemy'
-    },
-    {
-      enemyposition: 68,
-      name: 'lugiaEnemy'
-    },
-    {
-      enemyposition: 66,
-      name: 'lugia2Enemy'
-    },
+    //* fourth row of enemies
     {
       enemyposition: 54,
-      name: 'lugiaEnemy'
+      name: 'lugia2Enemy',
+      direction: 'right'
     },
     {
-      enemyposition: 61,
-      name: 'lugia2Enemy'
+      enemyposition: 57,
+      name: 'lugia2Enemy',
+      direction: 'right'
     },
     {
       enemyposition: 59,
-      name: 'lugiaEnemy'
+      name: 'lugia2Enemy',
+      direction: 'right'
     }
   ]
   //* floats array
@@ -84,70 +94,86 @@ function init() {
     //* first row of floats
     {
       floatposition: 36,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     {
       floatposition: 38,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     {
       floatposition: 40,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     {
       floatposition: 42,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     //* second row of floats
     {
       floatposition: 33,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     {
       floatposition: 32,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     {
       floatposition: 31,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     {
       floatposition: 30,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     //* third row of floats
     {
       floatposition: 25,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     {
       floatposition: 23,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     {
       floatposition: 21,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     {
       floatposition: 19,
-      name: 'float'
+      name: 'float',
+      direction: 'left'
     },
     //* fourth row of floats
     {
       floatposition: 9,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     {
       floatposition: 10,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     {
       floatposition: 11,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     },
     {
       floatposition: 12,
-      name: 'float'
+      name: 'float',
+      direction: 'right'
     }
   ]
   //* initial functions
@@ -193,7 +219,7 @@ function init() {
         console.log('hello')
       } else {
         button.classList.remove('active-button')
-      }   
+      }
     })
     gameOver.style.display = 'none'
     gameWon.style.display = 'none'
@@ -263,7 +289,7 @@ function init() {
       const cell = document.createElement('div')
       grid.appendChild(cell)
       cells.push(cell)
-      // cell.textContent = i //take out later
+      cell.textContent = i //take out later
     }
   }
 
@@ -370,29 +396,38 @@ function init() {
   //* loop game function starts here
   function loopGame() {   //* called in createGrid function
     // console.log(flareonPosition)   //* comment this out later
-    loopFloats = setInterval(moveFloats, 500) //* floats function called here
-    loopEnemies = setInterval(moveEnemies, 500) //* calling moveEnemies function here so that enemies can move
+    loopFloats = setInterval(moveFloats, 1000) //* floats function called here
+    loopEnemies = setInterval(moveEnemies, 1000) //* calling moveEnemies function here so that enemies can move
   }
 
   //* move enemies function starts here 
   function moveEnemies() { //* moveEnemies function    [index] is for all object in array
     for (let index = 0; index < enemiesArray.length; index++) {
-
       const x = enemiesArray[index].enemyposition % width
-      if (x > 0) {    //* if x is greater than 0 it is allowed to move left
-        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - 1  //* reassigns the value for the object's enemyposition property
-      } else {   //* if enemy can't move left anymore
-        enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the enemy back at it's starting position by using enemy position + ((with=9) - 1)
-      }
+      if (enemiesArray[index].direction === 'left') {
+        if (x > 0) {    //* if x is greater than 0 it is allowed to move left
+          enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - 1  //* reassigns the value for the object's enemyposition property
+        } else {   //* if enemy can't move left anymore
+          enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + (width - 1)  //* places the enemy back at it's starting position by using enemy position + ((with=9) - 1)
+        } 
+      } else if (enemiesArray[index].direction === 'right') {
+        if (x < width - 1) {
+          enemiesArray[index].enemyposition = enemiesArray[index].enemyposition + 1
+        } else {
+          enemiesArray[index].enemyposition = enemiesArray[index].enemyposition - (width - 1)
+        }
+      } 
     }
     displayEnemies() //* displays enemies. (removeEnemies function is already inside)
     enemyCollision() //* enemy collision is called here
   }
 
+
   //* display
   function displayEnemies() {
     removeEnemies()   //* removes the enemy 
     enemiesArray.forEach(enemy => cells[enemy.enemyposition].classList.add(enemy.name)) //* adds the enemy back on the grid - always need to remove before displaying so the board is a clean slate.
+    // displayLandscape() //* display enemies function called here
   }
 
   //* remove enemies
@@ -448,12 +483,19 @@ function init() {
   //* move floats function starts here
   function moveFloats() {
     for (let index = 0; index < floatsArray.length; index++) {
-
       const x = floatsArray[index].floatposition % width
-      if (x > 0) {
-        floatsArray[index].floatposition = floatsArray[index].floatposition - 1  //* changes the value for the object's float position property
-      } else {
-        floatsArray[index].floatposition = floatsArray[index].floatposition + (width - 1)  //* places the float back by using float position + ((with=9) - 1)
+      if (floatsArray[index].direction === 'left') {
+        if (x > 0) {
+          floatsArray[index].floatposition = floatsArray[index].floatposition - 1  //* changes the value for the object's float position property
+        } else {
+          floatsArray[index].floatposition = floatsArray[index].floatposition + (width - 1)  //* places the float back by using float position + ((with=9) - 1)
+        } 
+      } else if (floatsArray[index].direction === 'right') {
+        if (x < width - 1) {
+          floatsArray[index].floatposition = floatsArray[index].floatposition + 1
+        } else {
+          floatsArray[index].floatposition = floatsArray[index].floatposition - (width - 1)
+        }
       }
     }
     displayFloats() //* display floats function called here. Remove float function is already inside
@@ -464,6 +506,7 @@ function init() {
   function displayFloats() {
     removeFloats() //* remove floats function called here
     floatsArray.forEach(floatitem => cells[floatitem.floatposition].classList.add(floatitem.name))   //* float item "becomes the object name for the duration of the loop"
+    // displayWaves()  //* display waves called here
   }
 
   //* removes floats
@@ -477,7 +520,7 @@ function init() {
       if (floatsArray[index].floatposition === flareonPosition - 1) {  //* checking if float position is equal to flareon position. The flareon position is decreased by one in order for float position to chase after flareon position. 
         flareonPosition--   //* if statement above is true , then flareon position is reassigned. (flareon position = flareon position -1). This way the flareon position is one step ahead allows the float position to chase it.
         addPlayer('floatAndFlareon') //* adds float and flareon class to show flareon on float
-        
+
       } else {    ///* may need to get rid of this
         if (floatsArray[index].floatposition === previousFlareonPosition - width || floatsArray[index].floatposition === previousFlareonPosition + width) {
           previousFlareonPosition - width || previousFlareonPosition + width
@@ -495,7 +538,11 @@ function init() {
   function waterDangerZone() {
     //* selects all indexes ranging from 9 - 44 for danger zone/water
     if (flareonPosition >= 9 && flareonPosition <= 44 && !cells[flareonPosition].classList.contains('floatAndFlareon', 'flareona')) {
-      cells[flareonPosition].classList.add('splash')
+      setTimeout(function () {
+        // console.log(collisionExplosionPosition) 
+        cells[splashPosition].classList.add('splash')
+      }, 50)
+      // cells[flareonPosition].classList.add('splash')
       PlaySplashSound()  //* splash sound!
       removeFlareon()
       splashPosition = flareonPosition //* splash position is now equal to the flareon position so that the splash will be removed and not just flareon
@@ -517,13 +564,12 @@ function init() {
       }
       if (index >= 54 && index <= 89) {
         cell.style.backgroundColor = '#0b4314'
-        // cell.style.backgroundImage = ('url(\'https://media.giphy.com/media/yTrcALesdjU5O/giphy.gif\')')
       }
       if (index >= 45 && index <= 53) {
         cell.style.backgroundColor = '#ffdb57'
       }
-      if (index >= 9 && index <= 44) {
-        cell.style.backgroundColor = '#070b98'
+      if (index >= 9 && index <= 44)  {
+        cell.style.backgroundColor = '#9cdcef'
       }
       if (index === 0 || index === 2 || index === 4 || index === 6 || index === 8) {   //* end points
         cell.style.backgroundColor = '#ffdb57'
@@ -534,18 +580,40 @@ function init() {
     })
   }
 
+  // function displayWaves() {
+  //   cells.forEach((cell, index) => {
+  //     if (index >= 9 && index <= 44 ) {
+  //       cell.classList.remove('wave')
+  //     }
+  //     if (index >= 9 && index <= 44 && !cell.classList.contains('float')) {
+  //       cell.classList.add('wave')
+  //     }
+  //   })
+  // }
+
+  // function displayLandscape() {
+  //   cells.forEach((cell, index) => {
+  //     if (index >= 54 && index <= 89 ) {
+  //       cell.classList.remove('landscape')
+  //     }
+  //     if (index >= 54 && index <= 89 && !cell.classList.contains('lugiaEnemy' || 'lugia2Enemy')) {
+  //       cell.classList.add('landscape')
+  //     }
+  //   })
+  // }
+
 
   //* game sounds
   function PlaySplashSound() {
     const splashAudio = new Audio('./sounds/splashSound.mp3')
     splashAudio.loop = false
-    splashAudio.play() 
+    splashAudio.play()
   }
-  
+
   function PlayExplosionSound() {
     const ExplosionAudio = new Audio('./sounds/explosionSound.mp3')
     ExplosionAudio.loop = false
-    ExplosionAudio.play() 
+    ExplosionAudio.play()
   }
 
   // function PlayMainGameSound() {
@@ -562,7 +630,7 @@ function init() {
   difficultyButtons.forEach(button => {
     button.addEventListener('click', gameDifficulty) //* difficulty buttons
   })
-  
+
 
 
 
