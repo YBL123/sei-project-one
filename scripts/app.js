@@ -15,7 +15,7 @@ function init() {
   let cells = []
   const scoreDisplay = document.querySelector('#score-display')
   const remainingLives = document.querySelector('#player-lives')
-  const sound = document.querySelector('audio')
+  // const sound = document.querySelector('audio')
 
   // * Grid variables
   const width = 9
@@ -235,7 +235,7 @@ function init() {
   function startGame() {
     createGrid()
     style()
-    PlayExplosionSound()
+    // PlayMainGameSound()  //* main game sound called here
     document.getElementById('player-lives').innerHTML = playerLives
     document.getElementById('score-display').innerHTML = playerScore
     // * Event listeners
@@ -495,20 +495,20 @@ function init() {
   function style() {
     cells.forEach((cell, index) => {
       if (index >= 90 && index <= 98) {
-        cell.style.backgroundColor = 'red'
+        cell.style.backgroundColor = '#a2dfa2'
       }
       if (index >= 54 && index <= 89) {
-        cell.style.backgroundColor = 'green'
+        cell.style.backgroundColor = '#0b4314'
         // cell.style.backgroundImage = ('url(\'https://media.giphy.com/media/yTrcALesdjU5O/giphy.gif\')')
       }
       if (index >= 45 && index <= 53) {
-        cell.style.backgroundColor = 'red'
+        cell.style.backgroundColor = '#ffdb57'
       }
       if (index >= 9 && index <= 44) {
-        cell.style.backgroundColor = 'blue'
+        cell.style.backgroundColor = '#070b98'
       }
       if (index === 0 || index === 2 || index === 4 || index === 6 || index === 8) {   //* end points
-        cell.style.backgroundColor = 'red'
+        cell.style.backgroundColor = '#ffdb57'
       }
       if (index === 1 || index === 3 || index === 5 || index === 7) {
         cell.style.backgroundColor = 'orange'
@@ -530,11 +530,11 @@ function init() {
     ExplosionAudio.play() 
   }
 
-  function PlayExplosionSound() {
-    const mainGameAudio = new Audio('./sounds/backgroundSound.mp3')
-    mainGameAudio.loop = false
-    mainGameAudio.play() 
-  }
+  // function PlayMainGameSound() {
+  //   const mainGameAudio = new Audio('./sounds/backgroundSound.mp3')
+  //   mainGameAudio.loop = true
+  //   mainGameAudio.play()  
+  // }
 
 
   document.querySelector('.play-again-button2').addEventListener('click', resetGame)

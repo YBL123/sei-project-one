@@ -5,7 +5,7 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: black;
+  background-color: honeydew;
 }
 
 .container {
@@ -30,6 +30,26 @@ body {
   background-color: #072540;
 }
 
+.game-menu h1 {
+  margin-bottom: 0;
+  font-size: 50px;
+  font-family: machine Gunk;
+  letter-spacing: 8px;
+  color: gold;
+}
+
+.game-menu h2 {
+  margin: 0 30px 0px 100px;
+  font-style: italic;
+  font-family: machine Gunk;
+  letter-spacing: 3px;
+  color: darkred;
+}
+
+.game-menu .game-menu-image {
+  height: 150px;
+}
+
 .game-menu div {
   margin: 10px 0;
 }
@@ -39,26 +59,30 @@ body {
 }
 
 .active-button {
-  background-color: yellow;
+  background-color: gold;
 
 }
 
 .game-menu .difficulty-button {
+  font-family: machine Gunk;
+  letter-spacing: 3px;
   padding: 15px;
-    border: none;
-    box-shadow: none;
-    font-size: 15px;
-    margin: 0 12px;
-    border-radius: 5px;
-    min-width: 100px;
+  border: none;
+  box-shadow: none;
+  font-size: 15px;
+  margin: 0 12px;
+  border-radius: 5px;
+  min-width: 100px;
 }
 
 .game-menu .difficulty-button:hover {
-  background-color: violet;
+  background-color: lightskyblue;
 }
 
 .game-menu .start-game-button button {
-  background-color: coral;
+  font-family: machine Gunk;
+  letter-spacing: 3px;
+  background-color: lightskyblue;
   padding: 15px;
   min-width: 180px;
   border: none;
@@ -66,7 +90,7 @@ body {
   border-radius: 5px;
   font-size: 15px;
   font-weight: 500;
-  color: beige;
+  color: black;
 }
 
 
@@ -183,7 +207,7 @@ body {
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   flex-grow: 1;
   height: 9.09090909091%;
   width: 11.1111111111%;
