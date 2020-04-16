@@ -22,12 +22,13 @@ function init() {
   const cellCount = (width * width) + (width * 2)
 
   // * Game variables 
-  let verticalMovement
+  let verticalMovement  //* might comment out
   let loopFloats = null
   let loopEnemies = null
   let playerLives = 5
   const startingPosition = 94
   let flareonPosition = 94
+  let previousFlareonPosition   //* previousFlareonPosition
   let playerWinFlag = false
   let playerOnFloatFlag = false
   let playerScore = 0
@@ -215,7 +216,7 @@ function init() {
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
     gameOver.style.display = 'none'
-    document.querySelector('.final-score2').textContent = 'Your Score: ' + playerScore
+    document.querySelector('.final-score2').textContent = 'You Scored ' + playerScore + ' Points!'
     resetComponents()
   }
 
@@ -225,7 +226,7 @@ function init() {
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
     gameWon.style.display = 'none'
-    document.querySelector('.final-score').textContent = 'Your Score: ' + playerScore
+    document.querySelector('.final-score').textContent = 'You Scored ' + playerScore + ' Points!'
     resetComponents()
   }
 
@@ -254,12 +255,13 @@ function init() {
       const cell = document.createElement('div')
       grid.appendChild(cell)
       cells.push(cell)
-      cell.textContent = i //take out later
+      // cell.textContent = i //take out later
     }
   }
 
   //* handle key down function starts here 
   function handleKeyDown(event) {
+    previousFlareonPosition = flareonPosition   //* ???????
     const x = flareonPosition % width
     const y = Math.floor(flareonPosition / width)
     switch (event.keyCode) { // * calculate the new index
@@ -464,11 +466,19 @@ function init() {
   //* floats positive collision function starts here
   function floatCollision() {
     for (let index = 0; index < floatsArray.length; index++) {
-      console.log(floatsArray[index].floatposition === flareonPosition - 1 && verticalMovement)
       if (floatsArray[index].floatposition === flareonPosition - 1) {  //* checking if float position is equal to flareon position. The flareon position is decreased by one in order for float position to chase after flareon position. 
         flareonPosition--   //* if statement above is true , then flareon position is reassigned. (flareon position = flareon position -1). This way the flareon position is one step ahead allows the float position to chase it.
         addPlayer('floatAndFlareon') //* adds float and flareon class to show flareon on float
-      }
+        
+      } else {    ///* may need to get rid of this
+        if (floatsArray[index].floatposition === previousFlareonPosition - width || floatsArray[index].floatposition === previousFlareonPosition + width) {
+          previousFlareonPosition - width || previousFlareonPosition + width
+          // removeFlareon()
+          // addPlayer('flareona')
+        }
+
+
+      }   //* else closing bracket
     }
     waterDangerZone() //* water danger zone function is called here 
   }

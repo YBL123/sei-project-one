@@ -5,7 +5,7 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: honeydew;
+  background-color: #2b669b;
 }
 
 .container {
@@ -15,7 +15,6 @@ body {
   margin: 10px;
   padding: 20px;
 }
-
 
 .game-menu {
   display: flex;    
@@ -31,23 +30,25 @@ body {
 }
 
 .game-menu h1 {
+  margin: 0;
   margin-bottom: 0;
-  font-size: 50px;
+  font-size: 80px;
   font-family: machine Gunk;
   letter-spacing: 8px;
   color: gold;
 }
 
 .game-menu h2 {
-  margin: 0 30px 0px 100px;
+  margin: 0 30px 0px 180px;
   font-style: italic;
   font-family: machine Gunk;
+  font-size: 30px;
   letter-spacing: 3px;
   color: darkred;
 }
 
 .game-menu .game-menu-image {
-  height: 150px;
+  height: 180px;
 }
 
 .game-menu div {
@@ -55,6 +56,10 @@ body {
 }
 
 .game-menu .game-instructions {
+  margin: 0;
+  font-family: monospace;
+  font-size: 13px;
+  display: block;
   height: 200px;
 }
 
@@ -93,6 +98,10 @@ body {
   color: black;
 }
 
+.game-menu .start-game-button button:hover {
+  background-color: gold;
+}
+
 
 
 .game-won {
@@ -108,13 +117,35 @@ body {
   background-color: #072540;
 }
 
+.game-won h1 {
+  font-family: machine gunk;
+  letter-spacing: 8px;
+  color: gold;
+  font-size: 50px;
+  margin: 0;
+}
+
+.game-won .final-score2 {
+  margin-bottom: 20px;
+  font-family: atari classic chunky;
+  color: greenyellow;
+}
+
 .game-won div {
-  height: 100px;
-  margin: 10px;
+  /* height: 100px; */
+  margin-bottom: 15px;
+}
+
+.game-won .game-menu-image {
+  height: 250px;
+  margin-bottom: 20px;
 }
 
 .game-won button {
-  background-color: coral;
+  font-family: machine gunk;
+  letter-spacing: 3px;
+  color: black;
+  background-color: lightskyblue;
   padding: 15px;
   min-width: 180px;
   border: none;
@@ -122,7 +153,6 @@ body {
   border-radius: 5px;
   font-size: 15px;
   font-weight: 500;
-  color: beige;
 }
 
 
@@ -134,18 +164,28 @@ body {
   text-align: center;
   height: 85vh;
   width: 60%;
-  padding: 50px;
+  /* padding: 50px; */
   color: blanchedalmond;
   background-color: #072540;
 }
 
+.game-over h1 {
+  font-family: machine gunk;
+  font-size: 90px;
+  letter-spacing: 8px;
+  color: darkred;
+  margin: 0;
+}
+
 .game-over div {
-  height: 100px;
+  /* height: 100px; */
   margin: 10px;
 }
 
 .game-over button {
-  background-color: coral;
+  font-family: machine gunk;
+  letter-spacing: 3px;
+  background-color: lightskyblue;
   padding: 15px;
   min-width: 180px;
   border: none;
@@ -153,38 +193,20 @@ body {
   border-radius: 5px;
   font-size: 15px;
   font-weight: 500;
-  color: beige;
+  color: black;
 }
 
-
-
-.controls-wrapper {
-  align-items: unset;
-  align-self: stretch;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: space-around;
+.game-over .final-score {
+  height: 0;
+  margin: 10px;
+  font-family: atari classic chunky;
+  color: greenyellow;
 }
 
-.controls-wrapper p {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 500;
+.game-over .game-menu-image {
+  height: 300px;
 }
 
-
-
-.reset-button button {
-  background-color: cornflowerblue;
-    color: antiquewhite;
-    font-size: 16px;
-    margin-top: 10px;
-    min-width: 80px;
-    padding: 10px;
-    border: none;
-    box-shadow: none;
-    border-radius: 5px;
-}
 
 
 
@@ -202,7 +224,7 @@ body {
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  height: 600px;
+  height: 590px;
   width: 600px;
 }
 
@@ -211,6 +233,40 @@ body {
   flex-grow: 1;
   height: 9.09090909091%;
   width: 11.1111111111%;
+}
+
+.controls-wrapper {
+  font-family: machine gunk;
+  letter-spacing: 2px;
+  align-items: unset;
+  align-self: stretch;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.controls-wrapper p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: floralwhite;
+}
+
+.reset-button button {
+  font-family: machine gunk;
+  letter-spacing: 3px;
+  background-color: lightskyblue;
+  font-size: 16px;
+  margin-top: 10px;
+  min-width: 80px;
+  padding: 10px;
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+}
+
+.reset-button button:hover {
+  background-color: gold;
 }
     
     /* flareon */ 
