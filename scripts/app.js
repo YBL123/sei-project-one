@@ -187,6 +187,14 @@ function init() {
   function resetGame() {
     gameWrapper.style.display = 'none'
     gameMenu.style.display = 'flex'
+    difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
+      if (button.value === 'easy') {
+        button.classList.add('active-button')
+        console.log('hello')
+      } else {
+        button.classList.remove('active-button')
+      }   
+    })
     gameOver.style.display = 'none'
     gameWon.style.display = 'none'
     resetComponents()

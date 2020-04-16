@@ -246,7 +246,8 @@ body {
 }
 
 .controls-wrapper {
-  font-family: machine gunk;
+  font-family: atari classic chunky;
+  /* font-family: machine gunk; */
   letter-spacing: 2px;
   align-items: unset;
   align-self: stretch;
