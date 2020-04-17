@@ -32,6 +32,7 @@ function init() {
   let collisionExplosionPosition = 0
   let splashPosition = 0
   let playerScore = 0
+  let totalHighScore = null
   const highScore = []
   let gameSounds
   let chosenDifficulty = null
@@ -638,7 +639,6 @@ function init() {
         cell.style.backgroundColor = '#ffdb57'
       }
       if (index === 1 || index === 3 || index === 5 || index === 7 || index === 67 || index === 70 || index === 47) {
-        // cell.style.backgroundColor = '#ffdb57'
         cell.classList.add('coin')
       }
     })
@@ -653,6 +653,33 @@ function init() {
     }
   }
 
+  function resetGameWithHighScore() {
+    highScoreTable.style.display = 'flex'
+    gameWrapper.style.display = 'none'
+    gameMenu.style.display = 'none'
+    gameOver.style.display = 'none'
+    gameWon.style.display = 'none'
+    totalHighScore = document.querySelector('.score-input input').value
+    highScore.push({ name: totalHighScore, score: playerScore })
+    while (document.querySelector('.score-table').firstChild) {
+      document.querySelector('.score-table').removeChild(document.querySelector('.score-table').lastChild)
+    }
+    let x = null
+    highScore.forEach((item, i) => {
+      x = document.createElement('div')
+      x.innerHTML = item.name + ' - ' + item.score 
+      document.querySelector('.score-table').appendChild(x)
+    })
+    difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
+      if (button.value === 'easy') {
+        button.classList.add('active-button')
+      } else {
+        button.classList.remove('active-button')
+      }
+    })
+    gameSounds.stopBackGroundSound()  //* stop background sound
+    resetComponents()
+  }
 
 
 
