@@ -407,3 +407,34 @@ body {
   color: blanchedalmond;
   background-color: #072540;
 }
+
+.game-won .score-input input {
+  background-color: transparent;
+  border-bottom: 1px solid gold;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: #adff2e;
+  font-size: 14px;
+  box-shadow: none;
+  outline: none;
+  font-family: 'atari classic chunky';
+  line-height: 2;
+  margin: 5px 0;
+}
+
+.score-input {
+  font-family: 'atari classic chunky';
+  font-size: 12px;
+  color: #adff2e;
+}
+
+.high-score-table h1 {
+  font-family: 'machine gunk';
+    font-size: 80px;
+    color: gold;
+}
+
+.high-score-table .score-table div {
+font-family: 'atari classic chunky';
+}
