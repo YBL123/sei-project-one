@@ -15,6 +15,7 @@ function init() {
   let cells = []
   const scoreDisplay = document.querySelector('#score-display')
   const remainingLives = document.querySelector('#player-lives')
+  const highScoreTable = document.querySelector('.high-score-table')
 
   // * Grid variables
   const width = 9
@@ -28,10 +29,13 @@ function init() {
   let flareonPosition = 94
   let playerWinFlag = false
   let playerOnFloatFlag = false
-  let playerScore = 0
   let collisionExplosionPosition = 0
   let splashPosition = 0
+  let playerScore = 0
+  const highScore = []
   let gameSounds
+  let chosenDifficulty = null
+
 
 
 
@@ -236,22 +240,26 @@ function init() {
     this.classList.add('active-button')  //* this refers to the button being clicked.
     switch (event.target.value) {
       case 'easy':
+        chosenDifficulty = 'easy'
         playerLives = 5
         break
       case 'medium':
+        chosenDifficulty = 'medium'
         playerLives = 3
         break
       case 'hard':
+        chosenDifficulty = 'hard'
         playerLives = 1
         break
       default:
+        chosenDifficulty = 'easy'
         playerLives = 5
     }
-    console.log(playerLives)
   }
 
   //* game initiation. When start button is clicked menu is hidden and game grid becomes visible - then game loads
   function initiateGame() {
+    highScoreTable.style.display = 'none'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'flex'
     gameOver.style.display = 'none'
@@ -263,6 +271,7 @@ function init() {
 
   //* reset buton function
   function resetGame() {
+    highScoreTable.style.display = 'none'
     gameWrapper.style.display = 'none'
     gameMenu.style.display = 'flex'
     difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
@@ -300,6 +309,7 @@ function init() {
   function theGameWon() {
     gameSounds.stopBackGroundSound()  //* stop background sound
     gameSounds.playWinSound()  //* plays win sound
+    highScoreTable.style.display = 'none'
     gameWon.style.display = 'flex'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
@@ -312,6 +322,7 @@ function init() {
   function theGameOver() {
     gameSounds.stopBackGroundSound()  //* stop background sound
     gameSounds.playLostSound()  //* plays lost sound
+    highScoreTable.style.display = 'none'
     gameOver.style.display = 'flex'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
@@ -340,7 +351,7 @@ function init() {
       const cell = document.createElement('div')
       grid.appendChild(cell)
       cells.push(cell)
-      // cell.textContent = i //take out later
+      cell.textContent = i //take out later
     }
   }
 
@@ -354,7 +365,6 @@ function init() {
         if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going right you may go in. If there is you may not.
           resetFlareonOnFloat()
           flareonPosition++ //* right 
-          console.log('allowed')
           addPlayer('flareonRunRight')
         }
         break
@@ -369,8 +379,8 @@ function init() {
         if ((y > 0) && (!cells[flareonPosition - width].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going up, you may go in. If there is you may not.
           resetFlareonOnFloat()
           flareonPosition -= width //* up
-          // playerScore += 50
-          // scoreDisplay.textContent = playerScore 
+          // playerScore += 50  //* but need to fix it so it doesn't add points if you move down and up again
+          scoreDisplay.textContent = playerScore 
           addPlayer('flareonRunUp')
         }
         break
@@ -385,15 +395,15 @@ function init() {
         console.log('invalid key do nothing') //* comment out later
     }
 
-    //* when flareon has finished making her move she will return to flareonIdle
-    setTimeout(function () {       
-      cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
-      cells[flareonPosition].classList.remove('flareonRunRight')
-      cells[flareonPosition].classList.remove('flareonRunLeft')
-      cells[flareonPosition].classList.remove('flareonRunUp')
-      cells[flareonPosition].classList.remove('flareonRunDown')
-      cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
-    }, 3000)
+    // //* when flareon has finished making her move she will return to flareonIdle - if game is over before the timeout has completed there's a console error but it doesn't actually effect game
+    // setTimeout(function () {       
+    //   cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
+    //   cells[flareonPosition].classList.remove('flareonRunRight')
+    //   cells[flareonPosition].classList.remove('flareonRunLeft')
+    //   cells[flareonPosition].classList.remove('flareonRunUp')
+    //   cells[flareonPosition].classList.remove('flareonRunDown')
+    //   cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
+    // }, 3000)
 
   }
 
@@ -412,15 +422,20 @@ function init() {
   function winLogic() {
     //* gameScore if statement begins here 
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {  //* end points
-      cells[flareonPosition].classList.remove('coin')  //* once flareon reaches on of the end poiints the coin is removed
       cells[flareonPosition].classList.add('flareonIdle', 'flareona')  //* replaces coin with flareon 
-      cells[flareonPosition].style.backgroundColor = '#ffdb57'  //* once coin is collected background changes back to background colour
-      gameSounds.playCoinSound()
       playerScore += 150
       scoreDisplay.textContent = playerScore   //* prints score points ends here
       //* checking to see if all end points contain the shared class of 'flareona'. once all end points contain a 'flareona' class - player wins the game.
       if (cells[1].classList.contains('flareona') && cells[3].classList.contains('flareona') &&    //* flareona class so it doesn't depend on what arrow key used to get into end point
         cells[5].classList.contains('flareona') && cells[7].classList.contains('flareona')) {
+        if (chosenDifficulty === 'easy') {
+          playerScore += 500
+        } else if (chosenDifficulty === 'medium') { 
+          playerScore += 800
+        } else if (chosenDifficulty === 'hard') {
+          playerScore += 1000 //* if all flareons are at end points bouns 1000 points!
+        }
+        scoreDisplay.textContent = playerScore
         //* timer for 'win!' alert
         setTimeout(theGameWon, 500)
 
@@ -434,7 +449,8 @@ function init() {
 
   //* add player function starts here
   function addPlayer(playerDirection) {     //* player direction is the direction the player will be taking
-    winLogic()
+    coinCollection() //* coin collection function called here
+    winLogic() //* win logic funciton called here
     //* character creation
     removeFlareon() //* so when a new flareon is spawned in event of collision or "death" the previous one will be removed from the board
     if (cells[flareonPosition].classList.contains('float')) {
@@ -512,6 +528,8 @@ function init() {
     flareonPosition = startingPosition    //* takes player back to starting position
     if (!playerWinFlag) {
       playerLives--     //* so player lives will decrease when you "die"
+      playerScore -= 20
+      scoreDisplay.textContent = playerScore
     }
     playerWinFlag = false
     remainingLives.textContent = playerLives  //* prints number of lives remaining here
@@ -589,8 +607,7 @@ function init() {
       gameSounds.playSplashSound() //* splash sound!
       removeFlareon()
       splashPosition = flareonPosition //* splash position is now equal to the flareon position so that the splash will be removed and not just flareon
-      setTimeout(function () {
-        // console.log(collisionExplosionPosition) 
+      setTimeout(function () { 
         cells[splashPosition].classList.remove('splash')
       }, 250)
       nextFlareon()
@@ -617,16 +634,24 @@ function init() {
       if (index >= 9 && index <= 44) {
         cell.style.backgroundColor = '#9cdcef'
       }
-      if (index === 0 || index === 2 || index === 4 || index === 6 || index === 8) {   //* end points
+      if (index >= 0 && index <= 8) {   //* end points
         cell.style.backgroundColor = '#ffdb57'
       }
-      if (index === 1 || index === 3 || index === 5 || index === 7) {
-        cell.style.backgroundColor = '#ffdb57'
+      if (index === 1 || index === 3 || index === 5 || index === 7 || index === 67 || index === 70 || index === 47) {
+        // cell.style.backgroundColor = '#ffdb57'
         cell.classList.add('coin')
       }
     })
   }
 
+  function coinCollection(){
+    if (cells[flareonPosition].classList.contains('coin')) {
+      cells[flareonPosition].classList.remove('coin')
+      gameSounds.playCoinSound()
+      playerScore += 50
+      scoreDisplay.textContent = playerScore
+    }
+  }
 
 
 
