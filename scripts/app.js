@@ -184,9 +184,9 @@ function init() {
       this.game = './sounds/backgroundSound.mp3'
       this.splash = './sounds/splashSound.mp3'
       this.explosion = './sounds/explosionSound.mp3'
-      this.win = './sounds/game-won.mp3'
+      this.win = './sounds/win.mp3'
       this.coin = './sounds/coin-won.mp3'
-      this.gameover = './sounds/game-lost.mp3'
+      this.gameover = './sounds/gameover.mp3'
     }
     playBackgroundSound() {
       this.backGroundSound = new Audio(this.game)
@@ -220,6 +220,9 @@ function init() {
       this.actionsound = new Audio(this.gameover)
       this.actionsound.loop = false
       this.actionsound.play()
+    }
+    stopLostSound() {
+      this.backGroundSound.pause()
     }
   }
 
@@ -597,10 +600,10 @@ function init() {
   function style() {
     cells.forEach((cell, index) => {
       if (index >= 90 && index <= 98) {
-        cell.style.backgroundColor = '#66ae2e'
+        cell.style.backgroundColor = '#07253f'
       }
       if (index === 94) {
-        cell.style.backgroundColor = '#0d4b0f'
+        cell.style.backgroundColor = '#edb3eb'
       }
       if (index >= 54 && index <= 89) {
         cell.style.backgroundColor = '#edb3eb'

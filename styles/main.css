@@ -395,30 +395,8 @@ body {
 }
 
 .coin {
-  background-image: url('../assets/coin.gif');
+  background-image: url('https://i.gifer.com/Z3ur.gif');
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat, no-repeat;
 }
-
-/* .grid div.wave {
-  background-image: url('../assets/rocks.png');
-  background-size: contain;
-  background-position: bottom;
-  background-repeat: no-repeat, no-repeat;
-}
-
-.grid div.landscape {
-  background-image: url('../assets/ground_2.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat, no-repeat;
-  background-position: bottom;
-} */
-
-/* .grid div.start {
-  background-image: url('../assets/ground_3.png'), url('../assets/flareonIdle.gif');  /* would need to add assets/rock.png */
-  /* background-size: contain;
-  background-position: bottom;
-  background-repeat: no-repeat, no-repeat;
-} */ 
