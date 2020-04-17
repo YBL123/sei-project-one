@@ -15,20 +15,17 @@ function init() {
   let cells = []
   const scoreDisplay = document.querySelector('#score-display')
   const remainingLives = document.querySelector('#player-lives')
-  // const sound = document.querySelector('audio')
 
   // * Grid variables
   const width = 9
   const cellCount = (width * width) + (width * 2)
 
   // * Game variables 
-  // let verticalMovement  //* might comment out
   let loopFloats = null
   let loopEnemies = null
   let playerLives = 5
   const startingPosition = 94
   let flareonPosition = 94
-  // let previousFlareonPosition   //* previousFlareonPosition
   let playerWinFlag = false
   let playerOnFloatFlag = false
   let playerScore = 0
@@ -187,9 +184,9 @@ function init() {
       this.game = './sounds/backgroundSound.mp3'
       this.splash = './sounds/splashSound.mp3'
       this.explosion = './sounds/explosionSound.mp3'
-      this.win = './sounds/win.mp3'
-      this.endpoint = './sounds/endpoint.mp3'
-      this.gameover = './sounds/gameover.mp3'
+      this.win = './sounds/game-won.mp3'
+      this.coin = './sounds/coin-won.mp3'
+      this.gameover = './sounds/game-lost.mp3'
     }
     playBackgroundSound() {
       this.backGroundSound = new Audio(this.game)
@@ -210,17 +207,17 @@ function init() {
       this.explosionSound.play()
     }
     playCoinSound() {
-      this.actionsound = new Audio(this.coin_won)
+      this.actionsound = new Audio(this.coin)
       this.actionsound.loop = false
       this.actionsound.play()
     }
     playWinSound() {
-      this.actionsound = new Audio(this.game_won)
+      this.actionsound = new Audio(this.win)
       this.actionsound.loop = false
       this.actionsound.play()
     }
     playLostSound() {
-      this.actionsound = new Audio(this.game_lost)
+      this.actionsound = new Audio(this.gameover)
       this.actionsound.loop = false
       this.actionsound.play()
     }
@@ -298,6 +295,7 @@ function init() {
 
   //* the game won function
   function theGameWon() {
+    gameSounds.stopBackGroundSound()  //* stop background sound
     gameSounds.playWinSound()  //* plays win sound
     gameWon.style.display = 'flex'
     gameMenu.style.display = 'none'
@@ -309,6 +307,7 @@ function init() {
 
   //* the game over function
   function theGameOver() {
+    gameSounds.stopBackGroundSound()  //* stop background sound
     gameSounds.playLostSound()  //* plays lost sound
     gameOver.style.display = 'flex'
     gameMenu.style.display = 'none'
@@ -409,8 +408,8 @@ function init() {
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {  //* end points
       cells[flareonPosition].classList.remove('coin') 
       cells[flareonPosition].classList.add('flareonIdle', 'flareona')  //* replaces coin with flareon 
-      cells[flareonPosition].style.backgroundColor = 'red'  //* need to change color
-      gameSounds.playWinSound()
+      cells[flareonPosition].style.backgroundColor = '#ffdb57'  //* once coin is collected background chanes back to background colour
+      gameSounds.playCoinSound()
       playerScore += 150
       scoreDisplay.textContent = playerScore   //* prints score points ends here
       //* checking to see if all end points contain the shared class of 'flareona'. once all end points contain a 'flareona' class - player wins the game.
@@ -450,7 +449,6 @@ function init() {
 
   //* loop game function starts here
   function loopGame() {   //* called in createGrid function
-    // console.log(flareonPosition)   //* comment this out later
     loopFloats = setInterval(moveFloats, 800) //* floats function called here
     loopEnemies = setInterval(moveEnemies, 800) //* calling moveEnemies function here so that enemies can move
   }
@@ -555,7 +553,6 @@ function init() {
     removeFloats() //* remove floats function called here
     floatsArray.forEach(floatitem => cells[floatitem.floatposition].classList.add('float', floatitem.name)) //* 
     floatCollision() //* float collision function is called here
-    // displayWaves()  //* display waves called here
   }
 
   //* removes floats
@@ -618,64 +615,14 @@ function init() {
         cell.style.backgroundColor = '#ffdb57'
       }
       if (index === 1 || index === 3 || index === 5 || index === 7) {
-        cell.style.backgroundColor = 'orange'
+        cell.style.backgroundColor = '#ffdb57'
         cell.classList.add('coin')
       }
     })
   }
 
 
-  // function displayStartZone() {
-  //   cells.forEach((cell, index) => {
-  //     if (index >= 90 && index <= 98 ) {
-  //       cell.classList.remove('start')
-  //     }
-  //     if (index >= 90 && index <= 98 && cell.classList.contains('flareona')) {
-  //       cell.classList.add('start')
-  //     }
-  //   })
-  // }
 
-  // function displayWaves() {
-  //   cells.forEach((cell, index) => {
-  //     if (index >= 9 && index <= 44 ) {
-  //       cell.classList.remove('wave')
-  //     }
-  //     if (index >= 9 && index <= 44 && !cell.classList.contains('float')) {
-  //       cell.classList.add('wave')
-  //     }
-  //   })
-  // }
-
-  // function displayLandscape() {
-  //   cells.forEach((cell, index) => {
-  //     if (index >= 54 && index <= 89 ) {
-  //       cell.classList.remove('landscape')
-  //     }
-  //     if (index >= 54 && index <= 89 && !cell.classList.contains('lugiaEnemy' || 'lugia2Enemy')) {
-  //       cell.classList.add('landscape')
-  //     }
-  //   })
-  // }
-
-
-  // function PlaySplashSound() {
-  //   const splashAudio = new Audio('./sounds/splashSound.mp3')
-  //   splashAudio.loop = false
-  //   splashAudio.play()
-  // }
-
-  // function PlayExplosionSound() {
-  //   const ExplosionAudio = new Audio('./sounds/explosionSound.mp3')
-  //   ExplosionAudio.loop = false
-  //   ExplosionAudio.play()
-  // }
-
-  // function PlayMainGameSound() {
-  //   const mainGameAudio = new Audio('./sounds/backgroundSound.mp3')
-  //   mainGameAudio.loop = true
-  //   mainGameAudio.play()  
-  // }
 
 
 

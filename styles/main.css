@@ -370,14 +370,14 @@ body {
 
 /* float and flareon together */
 .grid div.floatAndFlareonLeft {
-  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-left.png'), url('../assets/rocks.png');
+  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-left.png');
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat, no-repeat;
 }
 
 .grid div.floatAndFlareonRight {
-  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-right.png'), url('../assets/rocks.png');
+  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-right.png');
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat, no-repeat;
