@@ -639,7 +639,6 @@ function init() {
         cell.style.backgroundColor = '#ffdb57'
       }
       if (index === 1 || index === 3 || index === 5 || index === 7 || index === 67 || index === 70 || index === 47) {
-        // cell.style.backgroundColor = '#ffdb57'
         cell.classList.add('coin')
       }
     })
@@ -669,7 +668,6 @@ function init() {
     highScore.forEach((item, i) => {
       x = document.createElement('div')
       x.innerHTML = item.name + ' - ' + item.score 
-      // x.innerHTML = '<div class="table1"> <div class="pname">' + item.name + '</div> <div class="pscore">' + item.score  + '</div> </div>'
       document.querySelector('.score-table').appendChild(x)
     })
     difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
