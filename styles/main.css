@@ -61,10 +61,6 @@ body {
   height: 180px;
 }
 
-.game-menu div {
-  /* margin: 10px 0; */
-}
-
 .game-menu .difficulty {
   padding: 0px 0 22px;
 }
@@ -181,7 +177,6 @@ body {
   text-align: center;
   height: 85vh;
   width: 60%;
-  /* padding: 50px; */
   color: blanchedalmond;
   background-color: #072540;
 }
@@ -195,7 +190,6 @@ body {
 }
 
 .game-over div {
-  /* height: 100px; */
   margin: 10px;
 }
 

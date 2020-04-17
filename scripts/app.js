@@ -97,7 +97,7 @@ function init() {
       direction: 'left'
     },
     {
-      floatposition: 38,
+      floatposition: 37,
       name: 'float-left',
       direction: 'left'
     },
@@ -107,7 +107,7 @@ function init() {
       direction: 'left'
     },
     {
-      floatposition: 42,
+      floatposition: 41,
       name: 'float-left',
       direction: 'left'
     },
@@ -139,7 +139,7 @@ function init() {
       direction: 'left'
     },
     {
-      floatposition: 23,
+      floatposition: 26,
       name: 'float-left',
       direction: 'left'
     },
@@ -149,7 +149,7 @@ function init() {
       direction: 'left'
     },
     {
-      floatposition: 19,
+      floatposition: 22,
       name: 'float-left',
       direction: 'left'
     },
@@ -369,6 +369,8 @@ function init() {
         if ((y > 0) && (!cells[flareonPosition - width].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going up, you may go in. If there is you may not.
           resetFlareonOnFloat()
           flareonPosition -= width //* up
+          // playerScore += 50
+          // scoreDisplay.textContent = playerScore 
           addPlayer('flareonRunUp')
         }
         break
@@ -383,18 +385,19 @@ function init() {
         console.log('invalid key do nothing') //* comment out later
     }
 
-    //* this may need to be commented out
-    // setTimeout(function () {       //* when flareon has finished making her move she will return to flareonIdle
-    //   cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
-    //   cells[flareonPosition].classList.remove('flareonRunRight')
-    //   cells[flareonPosition].classList.remove('flareonRunLeft')
-    //   cells[flareonPosition].classList.remove('flareonRunUp')
-    //   cells[flareonPosition].classList.remove('flareonRunDown')
-    //   cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
-    // }, 1000)
+    //* when flareon has finished making her move she will return to flareonIdle
+    setTimeout(function () {       
+      cells[flareonPosition].classList.remove('flareonIdle') // * remove flareon class from old position
+      cells[flareonPosition].classList.remove('flareonRunRight')
+      cells[flareonPosition].classList.remove('flareonRunLeft')
+      cells[flareonPosition].classList.remove('flareonRunUp')
+      cells[flareonPosition].classList.remove('flareonRunDown')
+      cells[flareonPosition].classList.add('flareonIdle') // * add the class back at the new position
+    }, 3000)
 
   }
 
+  //* reset flareon on float function starts here
   function resetFlareonOnFloat() {
     if (cells[flareonPosition].classList.contains('floatAndFlareonLeft')) {
       cells[flareonPosition].classList.remove('floatAndFlareonLeft')
@@ -409,9 +412,9 @@ function init() {
   function winLogic() {
     //* gameScore if statement begins here 
     if (flareonPosition === 1 || flareonPosition === 3 || flareonPosition === 5 || flareonPosition === 7) {  //* end points
-      cells[flareonPosition].classList.remove('coin') 
+      cells[flareonPosition].classList.remove('coin')  //* once flareon reaches on of the end poiints the coin is removed
       cells[flareonPosition].classList.add('flareonIdle', 'flareona')  //* replaces coin with flareon 
-      cells[flareonPosition].style.backgroundColor = '#ffdb57'  //* once coin is collected background chanes back to background colour
+      cells[flareonPosition].style.backgroundColor = '#ffdb57'  //* once coin is collected background changes back to background colour
       gameSounds.playCoinSound()
       playerScore += 150
       scoreDisplay.textContent = playerScore   //* prints score points ends here
@@ -481,8 +484,8 @@ function init() {
 
   //* display
   function displayEnemies() {
-    removeEnemies()   //* removes the enemy 
-    enemiesArray.forEach(enemy => cells[enemy.enemyposition].classList.add(enemy.name)) //* adds the enemy back on the grid - always need to remove before displaying so the board is a clean slate.
+    removeEnemies()   //* removes the enemies
+    enemiesArray.forEach(enemy => cells[enemy.enemyposition].classList.add(enemy.name)) //* adds the enemies back on the grid - always need to remove before displaying so the board is a clean slate.
   }
 
   //* remove enemies
@@ -563,15 +566,15 @@ function init() {
     cells.forEach(cell => cell.classList.remove('float', 'float-left','float-right', 'floatAndFlareonLeft', 'floatAndFlareonRight'))
   }
 
-  //* floats positive collision function starts here
+  //* floats 'positive' collision function starts here - when player gets on float
   function floatCollision() {
     if (playerOnFloatFlag) {  //* checks if player is on a float - true or false
       if (cells[flareonPosition - 1].classList.contains('float-left')) {  //* checking if falreon position - 1 contains the class of float left. This checks if the player's future movement will be left  
         flareonPosition--   //* if so player moves left
-        addPlayer('floatAndFlareonLeft')
+        addPlayer('floatAndFlareonLeft') //* float and flareon left is just the name given for the image of flareon with the green float 
       } else if (cells[flareonPosition + 1].classList.contains('float-right')){ //* checking if falreon position + 1 contains the class of float right. This checks if the player's future movement will be right
         flareonPosition++ //* if so player moves right
-        addPlayer('floatAndFlareonRight')
+        addPlayer('floatAndFlareonRight') //* float and flareon left is just the name given for the image of flareon with the yellow float
       }
     }
     waterDangerZone() //* water danger zone function is called here
