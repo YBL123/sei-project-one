@@ -263,6 +263,9 @@ body {
   margin-bottom: 12px;
   display: flex;
   justify-content: space-around;
+  background-color: #072540;
+  padding: 10px;
+  margin-bottom: 0;
 }
 
 .controls-wrapper p {
@@ -277,7 +280,7 @@ body {
   letter-spacing: 3px;
   background-color: lightskyblue;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 7px;
   min-width: 80px;
   padding: 10px;
   border: none;
@@ -330,14 +333,13 @@ body {
   background-image: url('../assets/lugia.gif');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: bottom;
   cursor: pointer;
 }
 
 .grid div.lugia2Enemy {
   background-image: url('../assets/lugia2.gif');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   cursor: pointer;
 }
 
@@ -350,8 +352,16 @@ body {
 }
 
 /* floats */
-.grid div.float {
-  background-image: url('../assets/Pad_04_1.png');   /* would need to add assets/rock.png */
+.grid div.float-left {
+  background-image: url('../assets/float-left.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  cursor: pointer;
+}
+
+.grid div.float-right {
+  background-image: url('../assets/float-right.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
@@ -359,22 +369,36 @@ body {
 }
 
 /* float and flareon together */
-.grid div.floatAndFlareon {
-  background-image: url('../assets/flareonIdle.gif'), url('../assets/Pad_04_1.png');  /* would need to add assets/rock.png */
+.grid div.floatAndFlareonLeft {
+  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-left.png'), url('../assets/rocks.png');
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat, no-repeat;
 }
 
-.grid div.water {
-  background-color: teal;
+.grid div.floatAndFlareonRight {
+  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-right.png'), url('../assets/rocks.png');
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat, no-repeat;
 }
+
+/* .grid div.water {
+  background-color: teal;
+} */
 
 .grid div.splash {
   background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/45f6d1cf-c850-4089-9394-2fa0d3c6f6de/d3l54k6-ba906ca2-a0c9-443a-a3cb-585b923b4b5f.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ1ZjZkMWNmLWM4NTAtNDA4OS05Mzk0LTJmYTBkM2M2ZjZkZVwvZDNsNTRrNi1iYTkwNmNhMi1hMGM5LTQ0M2EtYTNjYi01ODViOTIzYjRiNWYuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vRxg3ueSyzWtLh9nZtwHFZHuUNtUkuCoLNkcJEdImyo');  /* would need to add assets/rock.png */
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+.coin {
+  background-image: url('../assets/coin.gif');
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat, no-repeat;
 }
 
 /* .grid div.wave {
@@ -391,3 +415,10 @@ body {
   background-repeat: no-repeat, no-repeat;
   background-position: bottom;
 } */
+
+/* .grid div.start {
+  background-image: url('../assets/ground_3.png'), url('../assets/flareonIdle.gif');  /* would need to add assets/rock.png */
+  /* background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat, no-repeat;
+} */ 
