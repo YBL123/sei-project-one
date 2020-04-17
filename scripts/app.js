@@ -260,7 +260,7 @@ function init() {
 
   //* game initiation. When start button is clicked menu is hidden and game grid becomes visible - then game loads
   function initiateGame() {
-    highScoreTable.style.display = 'none'
+    // highScoreTable.style.display = 'none'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'flex'
     gameOver.style.display = 'none'
@@ -272,7 +272,7 @@ function init() {
 
   //* reset buton function
   function resetGame() {
-    highScoreTable.style.display = 'none'
+    // highScoreTable.style.display = 'none'
     gameWrapper.style.display = 'none'
     gameMenu.style.display = 'flex'
     difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
@@ -310,7 +310,7 @@ function init() {
   function theGameWon() {
     gameSounds.stopBackGroundSound()  //* stop background sound
     gameSounds.playWinSound()  //* plays win sound
-    highScoreTable.style.display = 'none'
+    // highScoreTable.style.display = 'none'
     gameWon.style.display = 'flex'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'
@@ -323,7 +323,7 @@ function init() {
   function theGameOver() {
     gameSounds.stopBackGroundSound()  //* stop background sound
     gameSounds.playLostSound()  //* plays lost sound
-    highScoreTable.style.display = 'none'
+    // highScoreTable.style.display = 'none'
     gameOver.style.display = 'flex'
     gameMenu.style.display = 'none'
     gameWrapper.style.display = 'none'

@@ -395,8 +395,8 @@ body {
   background-repeat: no-repeat, no-repeat;
 }
 
-.high-score-table {
-  display: none;     /* should be flex   */
+/* .high-score-table {
+  display: none;     
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -406,9 +406,9 @@ body {
   padding: 50px;
   color: blanchedalmond;
   background-color: #072540;
-}
+} */
 
-.game-won .score-input input {
+/* .game-won .score-input input {
   background-color: transparent;
   border-bottom: 1px solid gold;
   border-top: none;
@@ -437,4 +437,4 @@ body {
 
 .high-score-table .score-table div {
 font-family: 'atari classic chunky';
-}
+} */
