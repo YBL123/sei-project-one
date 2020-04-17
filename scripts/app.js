@@ -352,7 +352,7 @@ function init() {
       const cell = document.createElement('div')
       grid.appendChild(cell)
       cells.push(cell)
-      cell.textContent = i //take out later
+      // cell.textContent = i //take out later
     }
   }
 
