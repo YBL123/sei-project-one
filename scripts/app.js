@@ -15,7 +15,7 @@ function init() {
   let cells = []
   const scoreDisplay = document.querySelector('#score-display')
   const remainingLives = document.querySelector('#player-lives')
-  const highScoreTable = document.querySelector('.high-score-table')
+  // const highScoreTable = document.querySelector('.high-score-table')
 
   // * Grid variables
   const width = 9
@@ -32,8 +32,8 @@ function init() {
   let collisionExplosionPosition = 0
   let splashPosition = 0
   let playerScore = 0
-  let totalHighScore = null
-  const highScore = []
+  // const totalHighScore = null
+  // const highScore = []
   let gameSounds
   let chosenDifficulty = null
 
@@ -653,33 +653,33 @@ function init() {
     }
   }
 
-  function resetGameWithHighScore() {
-    highScoreTable.style.display = 'flex'
-    gameWrapper.style.display = 'none'
-    gameMenu.style.display = 'none'
-    gameOver.style.display = 'none'
-    gameWon.style.display = 'none'
-    totalHighScore = document.querySelector('.score-input input').value
-    highScore.push({ name: totalHighScore, score: playerScore })
-    while (document.querySelector('.score-table').firstChild) {
-      document.querySelector('.score-table').removeChild(document.querySelector('.score-table').lastChild)
-    }
-    let x = null
-    highScore.forEach((item, i) => {
-      x = document.createElement('div')
-      x.innerHTML = item.name + ' - ' + item.score 
-      document.querySelector('.score-table').appendChild(x)
-    })
-    difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
-      if (button.value === 'easy') {
-        button.classList.add('active-button')
-      } else {
-        button.classList.remove('active-button')
-      }
-    })
-    gameSounds.stopBackGroundSound()  //* stop background sound
-    resetComponents()
-  }
+  // function resetGameWithHighScore() {
+  //   highScoreTable.style.display = 'flex'
+  //   gameWrapper.style.display = 'none'
+  //   gameMenu.style.display = 'none'
+  //   gameOver.style.display = 'none'
+  //   gameWon.style.display = 'none'
+  //   totalHighScore = document.querySelector('.score-input input').value
+  //   highScore.push({ name: totalHighScore, score: playerScore })
+  //   while (document.querySelector('.score-table').firstChild) {
+  //     document.querySelector('.score-table').removeChild(document.querySelector('.score-table').lastChild)
+  //   }
+  //   let x = null
+  //   highScore.forEach((item, i) => {
+  //     x = document.createElement('div')
+  //     x.innerHTML = item.name + ' - ' + item.score 
+  //     document.querySelector('.score-table').appendChild(x)
+  //   })
+  //   difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
+  //     if (button.value === 'easy') {
+  //       button.classList.add('active-button')
+  //     } else {
+  //       button.classList.remove('active-button')
+  //     }
+  //   })
+  //   gameSounds.stopBackGroundSound()  //* stop background sound
+  //   resetComponents()
+  // }
 
 
 
