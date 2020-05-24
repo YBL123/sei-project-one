@@ -1,5 +1,4 @@
-![GA logo](GA.png) 
-# Project 1: Flareon Frogger 
+| ![GA logo](GA.png) | # Project 1: Flareon Frogger |
 
 ## Overview
 
