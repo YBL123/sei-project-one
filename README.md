@@ -50,6 +50,44 @@ To move the Flareons the player uses the arrow keys. For horizontal movement thi
 
 //* insert code snippet of handleKeyDwon function & switch statement 
 
+,,, 
+  function handleKeyDown(event) {
+    //* remove float and flareon whether right or left if present. add Only right or left float image.
+    const x = flareonPosition % width
+    const y = Math.floor(flareonPosition / width)
+    switch (event.keyCode) { // * calculate the new index
+      case 39:
+        if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going right you may go in. If there is you may not.
+          resetFlareonOnFloat()
+          flareonPosition++ //* right 
+          addPlayer('flareonRunRight')
+        }
+        break
+      case 37:
+        if ((x > 0) && (!cells[flareonPosition - 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going left, you may go in. If there is you may not.
+          resetFlareonOnFloat()
+          flareonPosition-- //* left
+          addPlayer('flareonRunLeft')
+        }
+        break
+      case 38:
+        if ((y > 0) && (!cells[flareonPosition - width].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going up, you may go in. If there is you may not.
+          resetFlareonOnFloat()
+          flareonPosition -= width //* up
+          // playerScore += 50  //* but need to fix it so it doesn't add points if you move down and up again
+          scoreDisplay.textContent = playerScore 
+          addPlayer('flareonRunUp')
+        }
+        break
+      case 40:
+        if (y < width + 1) {
+          resetFlareonOnFloat()
+          flareonPosition += width //* down
+          addPlayer('flareonRunDown')
+        }
+        break
+    }
+
 
 Moving object collision
 
