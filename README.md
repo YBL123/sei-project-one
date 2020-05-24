@@ -27,6 +27,8 @@ Clone or download the repo. Then open the index.html file in your browser to pla
 
 
 //* insert image/gif of game here. Game-menu, game-play, game won and game over
+![](menu.png)
+
 
 
 Brief 
