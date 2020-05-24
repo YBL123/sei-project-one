@@ -188,23 +188,23 @@ I'm quite happy with the styling of the game although there are definitely impro
 
 ## Bugs
 
-glitch on floats - if jumping on at the edge of the index. The player is sometimes moved on to the next row of floats above.
+Glitch on floats - if jumping on at the edge of the index. The player is sometimes moved on to the next row of floats above.
 
 
 
 ## Future Improvements
 
-Creating a phone-friendly version
-Mute audio option
-Other player character selection options
-Additional levels with increasing difficulty/complexity
-High score feature + entering name for high score board
-2 player option
-Countdown to complete the game option
-Smoother image transistion
-Improved graphics + get background images to work with the moving objects and Flareon.
-Additional point system like the classic frogger. When you move up the board +10 points. But make the function calculate it so that the player is only awarded the points for progressing up the board once. So that if the player goes down and then up again they wouldn't be awarded the points for making the same progression. 
-Also being able to carry an extra chracter like in the classic frogger for extra points.
+..* Making the design responsive
+..* Mute audio option
+..* Player character selection options
+..* Additional levels with increasing difficulty/complexity
+..* High score feature + user beign able to enter their name for high score board
+..* 2 player option
+..* Countdown to complete the game option
+..* Smoother image transistions
+..* Improved graphics + get background images to work with the moving objects and Flareon.
+..* Additional point system like the classic frogger. When you move up the board +10 points. But making the function calculate it so that the player is only awarded the points for progressing up the board once. This way if the player goes down and then up again they wouldn't be awarded the points for making the same progression. 
+..* Being able to "carry" another special chracter like in the classic frogger for extra points.
 
 
 ## Credits
