@@ -83,7 +83,12 @@ To move the Flareons the player uses the arrow keys. For horizontal movement thi
 
 If Flareon and one of the enemy classes are in the same div then there will be a collision. I added an explosion gif at the point of collision.
 
-//* inset code snippet of collision and explosion gif 
+```javascript
+function enemyCollision() {
+    if (cells[flareonPosition].classList.contains('lugiaEnemy') || cells[flareonPosition].classList.contains('lugia2Enemy')) {
+      cells[flareonPosition].classList.add('collision')
+  ...
+```
 
 
 ## Float collision
