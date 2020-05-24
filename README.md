@@ -90,16 +90,34 @@ function enemyCollision() {
   ...
 ```
 
-
 ## Float collision
 
 I also had to take into account when the Flareon would need to get on the floats. I made it so the Flareon is always one step behind the float, this allows it to appear as though the Flareon is jumping onto the float. 
 
-//* insert code snippet of flareon jumping onto float
+```javascript
+  function floatCollision() {
+    if (playerOnFloatFlag) { 
 
-I added another css class that would display Flareon with the float in the background
+      if (cells[flareonPosition - 1].classList.contains('float-left')) {  
+        flareonPosition--  
 
-//* insert code snippet of CSS
+        addPlayer('floatAndFlareonLeft')  
+
+      } else if (cells[flareonPosition + 1].classList.contains('float-right')){ 
+        flareonPosition++ 
+ ...
+```
+
+I added another css class that would display Flareon with the float in the background (both left and right).
+
+```css
+.grid div.floatAndFlareonLeft {
+  background-image: url('../assets/flareonIdle.gif'), url('../assets/float-left.png');
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat, no-repeat;
+}
+```
 
 
 ## Water danger zone
