@@ -1,5 +1,5 @@
 # Project 1: Flareon Frogger
-aka 'Frogger'
+## aka 'Frogger'
 
 ## Overview
 
