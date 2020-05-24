@@ -193,7 +193,7 @@ Glitch on floats - if jumping on at the edge of the index. The player is sometim
 
 
 ## Future Improvements
-
+1.
 ⋅⋅* Making the design responsive
 ⋅⋅* Mute audio option
 ⋅⋅* Player character selection options
