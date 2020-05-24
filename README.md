@@ -8,7 +8,7 @@ This is my take on the classic game Frogger. It was my first project on my Softw
 
 ## Deployment 
 
-Launch on GitHub Pages https://ybl123.github.io/sei-project-one/ 
+Launch on GitHub Pages [here](https://ybl123.github.io/sei-project-one/)
 
 
 ## Built with
