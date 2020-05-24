@@ -48,7 +48,7 @@ The concept for my game is to guide the group of 4 Flareons, one by one to the o
 
 To move the Flareons the player uses the arrow keys. For horizontal movement this would be +/-1 and +/- width for vertical movement. I gave each key a different gif of Flareon so that, whichever direction the player turned the gif of Flareon will align. Before starting the game the player selects at what difficulty they would like to play. With 'easy' the player will start out with 5 lives, 3 for 'medium' and 1 for 'hard'.
 
-###Movement
+### Movement
 
 ```javascript
   function handleKeyDown(event) {
@@ -65,7 +65,7 @@ To move the Flareons the player uses the arrow keys. For horizontal movement thi
   ...
 ```
 
-###Difficulty
+### Difficulty
 
 ```javascript
   function gameDifficulty(event) {
