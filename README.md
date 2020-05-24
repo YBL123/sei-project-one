@@ -54,11 +54,11 @@ To move the Flareons the player uses the arrow keys. For horizontal movement thi
   function handleKeyDown(event) {
     const x = flareonPosition % width
     const y = Math.floor(flareonPosition / width)
-    switch (event.keyCode) { // * calculate the new index
+    switch (event.keyCode) { 
       case 39:
-        if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { //* if a flareona class is not present within cell's index if going right you may go in. If there is you may not.
+        if ((x < width - 1) && (!cells[flareonPosition + 1].classList.contains('flareona'))) { 
           resetFlareonOnFloat()
-          flareonPosition++ //* right 
+          flareonPosition++ 
           addPlayer('flareonRunRight')
         }
         break
