@@ -50,7 +50,7 @@ To move the Flareons the player uses the arrow keys. For horizontal movement thi
 
 //* insert code snippet of handleKeyDwon function & switch statement 
 
-``` 
+```javascript
   function handleKeyDown(event) {
     const x = flareonPosition % width
     const y = Math.floor(flareonPosition / width)
@@ -63,7 +63,7 @@ To move the Flareons the player uses the arrow keys. For horizontal movement thi
         }
         break
   ...
-
+```
 
 Moving object collision
 
