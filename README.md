@@ -1,5 +1,4 @@
-![](GA.png) 
-# Project 1: Flareon Frogger 
+![# Project 1: Flareon Frogger ](GA.png) # Project 1: Flareon Frogger 
 ### aka 'Frogger'
 
 ## Overview
