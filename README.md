@@ -145,8 +145,27 @@ If player is in this area and not on a float they will die. I added a splash gif
 
 I Added background music that starts when the game begins and loops continuously during game play. If the player wins the game then a win window pops up. The background music is paused and a 'victory' sound clip is played, (not on a loop). If the player loses the game then a game over window pops up. Once again the background music is paused and a 'game over' sound clip is played, (not on a loop). If the player clicks the reset button, they are taken back to the main menu and the background music is also paused. 
 
-//* insert code of sounds 
+```javascript
+  class Sounds {
 
+    constructor() {
+      this.game = './sounds/backgroundSound.mp3'
+     ...
+    }
+    playBackgroundSound() {
+      this.backGroundSound = new Audio(this.game)
+      this.backGroundSound.loop = true
+      this.backGroundSound.play()
+```
+
+```javascript
+function initiateGame() {
+...
+    gameSounds = new Sounds()
+    gameSounds.playBackgroundSound() 
+    startGame() 
+  }
+```
 ## Win Condition
 
 Once all four Flareons have reached an end point the game is won.
