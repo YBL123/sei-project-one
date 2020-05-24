@@ -1,5 +1,4 @@
-![GA logo](GA.png) 
-<img align="left" width="80" height="80" src="GA.png" alt="GA logo">
+<img align="left" width="50" height="50" src="GA.png" alt="GA logo">
 
 # Project 1: Flareon Frogger 
 
