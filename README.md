@@ -1,6 +1,5 @@
-![](GA.png) 
+![GA logo](GA.png) 
 # Project 1: Flareon Frogger 
-### aka 'Frogger'
 
 ## Overview
 
@@ -25,10 +24,10 @@ GitHub
 Clone or download the repo. Then open the index.html file in your browser to play the game. The game should be compatible with all browsers.
 
 
-![](menu.png)
-![](gameplay.png)
-![](win.png)
-![](gameover.png)
+![menu screenshot](menu.png)
+![gameplay screenshot](gameplay.png)
+![win screenshot](win.png)
+![gameover screenshot](gameover.png)
 
 
 
