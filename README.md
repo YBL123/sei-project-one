@@ -14,11 +14,11 @@ Launch on GitHub Pages [here](https://ybl123.github.io/sei-project-one/)
 
 ## Built with
 
-HTML5
-CSS3
-JavaScript (ES6)
-Git
-GitHub
+* HTML5
+* CSS3
+* JavaScript (ES6)
+* Git
+* GitHub
 
 ## Getting Started
 
