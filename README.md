@@ -1,3 +1,4 @@
+![](GA.png) 
 # Project 1: Flareon Frogger 
 ### aka 'Frogger'
 
