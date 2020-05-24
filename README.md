@@ -193,18 +193,18 @@ Glitch on floats - if jumping on at the edge of the index. The player is sometim
 
 
 ## Future Improvements
-1.
-⋅⋅* Making the design responsive
-⋅⋅* Mute audio option
-⋅⋅* Player character selection options
-⋅⋅* Additional levels with increasing difficulty/complexity
-⋅⋅* High score feature + user beign able to enter their name for high score board
-⋅⋅* 2 player option
-⋅⋅* Countdown to complete the game option
-⋅⋅* Smoother image transistions
-⋅⋅* Improved graphics + get background images to work with the moving objects and Flareon.
-⋅⋅* Additional point system like the classic frogger. When you move up the board +10 points. But making the function calculate it so that the player is only awarded the points for progressing up the board once. This way if the player goes down and then up again they wouldn't be awarded the points for making the same progression. 
-⋅⋅* Being able to "carry" another special chracter like in the classic frogger for extra points.
+
+* Making the design responsive
+* Mute audio option
+* Player character selection options
+* Additional levels with increasing difficulty/complexity
+* High score feature + user beign able to enter their name for high score board
+* 2 player option
+* Countdown to complete the game option
+* Smoother image transistions
+* Improved graphics + get background images to work with the moving objects and Flareon.
+* Additional point system like the classic frogger. When you move up the board +10 points. But making the function calculate it so that the player is only awarded the points for progressing up the board once. This way if the player goes down and then up again they wouldn't be awarded the points for making the same progression. 
+* Being able to "carry" another special chracter like in the classic frogger for extra points.
 
 
 ## Credits
