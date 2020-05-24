@@ -124,7 +124,22 @@ I added another css class that would display Flareon with the float in the backg
 
 If player is in this area and not on a float they will die. I added a splash gif for the point of 'collision'.
 
-//* insert code snippet of water danger zone
+```javascript
+  function waterDangerZone() {
+    
+    if (flareonPosition >= 9 && flareonPosition <= 44 && (!cells[flareonPosition].classList.contains('floatAndFlareonLeft') && !cells[flareonPosition].classList.contains('floatAndFlareonRight'))) {
+      cells[flareonPosition].classList.add('splash')
+      gameSounds.playSplashSound() 
+      removeFlareon()
+      splashPosition = flareonPosition 
+
+      setTimeout(function () { 
+        cells[splashPosition].classList.remove('splash')
+      }, 250)
+      nextFlareon()
+    }
+  }
+```
 
 ## Audio
 
