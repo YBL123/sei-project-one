@@ -1,5 +1,5 @@
 # Project 1: Flareon Frogger
-## aka 'Frogger'
+#### aka 'Frogger'
 
 ## Overview
 
@@ -150,6 +150,6 @@ Additional point system like the classic frogger. When you move up the board +10
 Also being able to carry an extra chracter like in the classic frogger for extra points.
 
 
-## credits
+## Credits
 
 Starter Code: Jack May - General Assembly
