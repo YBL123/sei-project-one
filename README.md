@@ -26,7 +26,6 @@ Getting Started
 Clone or download the repo. Then open the index.html file in your browser to play the game. The game should be compatible with all browsers.
 
 
-//* insert image/gif of game here. Game-menu, game-play, game won and game over
 ![](menu.png)
 ![](gameplay.png)
 ![](win.png)
