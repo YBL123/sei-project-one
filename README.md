@@ -24,21 +24,17 @@ Launch on GitHub Pages [here](https://ybl123.github.io/sei-project-one/)
 
 Clone or download the repo. Then open the index.html file in your browser to play the game. The game should be compatible with all browsers.
 
-
 ![menu screenshot](menu.png) ![gameplay screenshot](gameplay.png)
 ![win screenshot](win.png) ![gameover screenshot](gameover.png)
 
-
-
-
 ## Brief 
 
-Render a grid-based game in the browser
-Design logic for winning & visually display which player won
-include separate HTML/CSS/JavaScript files
-Use Javascript for DOM manipulation
-Deploy your game online
-Use semantic markup for HTML and CSS (adhere to best practices)
+* Render a grid-based game in the browser
+* Design logic for winning & visually display which player won
+* Include separate HTML/CSS/JavaScript files
+* Use Javascript for DOM manipulation
+* Deploy your game online
+* Use semantic markup for HTML and CSS (adhere to best practices)
 
 ## Game 
 
