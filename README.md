@@ -202,6 +202,10 @@ Glitch on floats - if jumping on at the edge of the index. The player is sometim
 * Additional point system like the classic frogger. When you move up the board +10 points. But making the function calculate it so that the player is only awarded the points for progressing up the board once. This way if the player goes down and then up again they wouldn't be awarded the points for making the same progression. 
 * Being able to "carry" another special chracter like in the classic frogger for extra points.
 
+## Key Learnings
+
+This was my first solo project and also my first 'real' project working with html, JavaScript and CSS. Writing the game logic was very challenging but also rewarding. I feel as though I gained a much better understanding of JavaScript. I also learnt to prioritise features within a given deadline.
+
 
 ## Credits
 
