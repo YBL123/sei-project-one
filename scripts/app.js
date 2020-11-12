@@ -653,39 +653,7 @@ function init() {
     }
   }
 
-  // function resetGameWithHighScore() {
-  //   highScoreTable.style.display = 'flex'
-  //   gameWrapper.style.display = 'none'
-  //   gameMenu.style.display = 'none'
-  //   gameOver.style.display = 'none'
-  //   gameWon.style.display = 'none'
-  //   totalHighScore = document.querySelector('.score-input input').value
-  //   highScore.push({ name: totalHighScore, score: playerScore })
-  //   while (document.querySelector('.score-table').firstChild) {
-  //     document.querySelector('.score-table').removeChild(document.querySelector('.score-table').lastChild)
-  //   }
-  //   let x = null
-  //   highScore.forEach((item, i) => {
-  //     x = document.createElement('div')
-  //     x.innerHTML = item.name + ' - ' + item.score 
-  //     document.querySelector('.score-table').appendChild(x)
-  //   })
-  //   difficultyButtons.forEach(button => {   //* removes active button class from all so all buttons start without it.
-  //     if (button.value === 'easy') {
-  //       button.classList.add('active-button')
-  //     } else {
-  //       button.classList.remove('active-button')
-  //     }
-  //   })
-  //   gameSounds.stopBackGroundSound()  //* stop background sound
-  //   resetComponents()
-  // }
-
-
-
-
-
-
+  
   document.querySelector('.play-again-button2').addEventListener('click', resetGame)
   playAgainButton.addEventListener('click', resetGame)  //* goes back to main menu
   startButton.addEventListener('click', initiateGame)
